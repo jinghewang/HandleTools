@@ -1,0 +1,7 @@
+bin\Debug\Show.exe
+bin\Debug\Show.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Show.Form1.resources
+obj\Debug\Show.csproj.GenerateResource.Cache
+obj\Debug\Show.exe
+obj\Debug\Show.pdb

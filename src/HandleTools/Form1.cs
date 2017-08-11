@@ -119,6 +119,9 @@ namespace Show
         private GroupBox groupBox8;
         private GroupBox groupBox9;
         private Button button36;
+        private Button button37;
+        private Button button38;
+        private Button button39;
         public IntPtr myControl;
         #endregion
 
@@ -335,6 +338,9 @@ namespace Show
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button37 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -512,6 +518,8 @@ namespace Show
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.button38);
+            this.groupBox2.Controls.Add(this.button37);
             this.groupBox2.Controls.Add(this.button34);
             this.groupBox2.Controls.Add(this.button31);
             this.groupBox2.Controls.Add(this.label9);
@@ -786,6 +794,7 @@ namespace Show
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.button39);
             this.groupBox6.Controls.Add(this.tbDlgHandle);
             this.groupBox6.Controls.Add(this.button14);
             this.groupBox6.Controls.Add(this.textBox6);
@@ -1227,6 +1236,34 @@ namespace Show
             this.textBox2.TabIndex = 10;
             this.textBox2.Text = "textBox2";
             // 
+            // button37
+            // 
+            this.button37.Location = new System.Drawing.Point(559, 249);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(120, 23);
+            this.button37.TabIndex = 61;
+            this.button37.Text = "Save Config";
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
+            // button38
+            // 
+            this.button38.Location = new System.Drawing.Point(433, 249);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(120, 23);
+            this.button38.TabIndex = 62;
+            this.button38.Text = "Load Config";
+            this.button38.Visible = false;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
+            // 
+            // button39
+            // 
+            this.button39.Location = new System.Drawing.Point(559, 109);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(120, 23);
+            this.button39.TabIndex = 62;
+            this.button39.Text = "Save Config";
+            this.button39.Click += new System.EventHandler(this.button39_Click);
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
@@ -1274,6 +1311,9 @@ namespace Show
         private void Form1_Load(object sender, System.EventArgs e)
         {
             tbWindowName.Text = "TeamViewer";
+            LoadConfig(groupBox2,"main");
+            LoadConfig(groupBox6,"child");
+
             button31_Click(sender, e);
             btnLoadConfig_Click(sender,e);
         }
@@ -1324,14 +1364,9 @@ namespace Show
 
         private void button10_Click(object sender, System.EventArgs e)
         {
-            if (textBox7.Text == "null")
-            {
-                myhwnd = FindWindow(null, tbWindowName.Text);
-            }
-            else
-            {
-                myhwnd = FindWindow(textBox7.Text, tbWindowName.Text);
-            }
+            string lpClassName = string.IsNullOrEmpty(textBox7.Text) ? null : textBox7.Text;
+            string lpWindowName = string.IsNullOrEmpty(tbWindowName.Text) ? null : tbWindowName.Text;
+            myhwnd = FindWindow(lpClassName, lpWindowName);
 
             setWindowHandle(myhwnd);
             button30_Click(sender, e);
@@ -2083,7 +2118,7 @@ namespace Show
 
             for (int i = 0; i < groupBox5.Controls.Count; i++)
             {
-                XmlElement elem = (XmlElement)invoice.SelectSingleNode("elem[@no=" + i.ToString() + "]");
+                XmlElement elem = (XmlElement)invoice.SelectSingleNode("elem[@no='" + i.ToString() + "']");
                 Panel panel = (Panel)groupBox5.Controls[i];
                 if (elem == null)
                 {
@@ -2180,6 +2215,97 @@ namespace Show
             //SendMessage(hwnd, WM_CLICK, 0, "0");//给主窗体上button发送鼠标点击消息，
             SendMessage(hwnd, BM_CLICK, 0, "0");     //发送点击按钮的消息
             showResult3(hwnd.ToInt32(), ((Button)sender).Text);
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
+            DialogResult dr = MessageBox.Show("确定要保存吗?", "操作", messButton);
+            if (dr == DialogResult.OK)//如果点击“确定”按钮
+            {
+
+            }
+            else//如果点击“取消”按钮
+            {
+                return;
+            }
+
+            SaveConfig(groupBox2, "main");
+        }
+
+        private static void SaveConfig(Control gb, string configNode)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load("config.xml");
+            XmlElement root = xmlDoc.DocumentElement;
+            XmlElement saveNode = (XmlElement)xmlDoc.SelectSingleNode("root/" + configNode);
+            if (saveNode == null)
+            {
+                saveNode = xmlDoc.CreateElement(configNode);
+            }
+            saveNode.RemoveAll();
+
+            for (int i = 0; i < gb.Controls.Count; i++)
+            {
+                Control con = gb.Controls[i];
+                if (con.GetType() == typeof(TextBox))
+                {
+                    XmlElement elem = xmlDoc.CreateElement("elem");
+                    elem.SetAttribute("name", con.Name);
+                    elem.SetAttribute("text",con.Text);
+                    //elem.InnerText = con.Text;
+                    saveNode.AppendChild(elem);
+                }
+            }
+            root.AppendChild(saveNode);
+            xmlDoc.Save("config.xml");
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            LoadConfig(groupBox2, "main");
+        }
+
+        private static void LoadConfig(Control gb, string configNode)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load("config.xml");
+            XmlElement invoice = (XmlElement)xmlDoc.SelectSingleNode("root/" + configNode);
+            if (invoice == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < gb.Controls.Count; i++)
+            {
+                Control con = gb.Controls[i];
+                XmlElement elem = (XmlElement)invoice.SelectSingleNode("elem[@name='" + con.Name + "']");
+                if (elem == null)
+                {
+                    continue;
+                }
+
+                if (con.GetType() == typeof(TextBox))
+                {
+                    con.Text = elem.GetAttribute("text");
+                }
+            }
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
+            DialogResult dr = MessageBox.Show("确定要保存吗?", "操作", messButton);
+            if (dr == DialogResult.OK)//如果点击“确定”按钮
+            {
+
+            }
+            else//如果点击“取消”按钮
+            {
+                return;
+            }
+
+            SaveConfig(groupBox6, "child");
         }
 
     }

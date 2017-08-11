@@ -1233,7 +1233,7 @@ namespace Show
             this.ClientSize = new System.Drawing.Size(720, 487);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
-            this.Text = "WindowsHandleTools";
+            this.Text = "HandleTools";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

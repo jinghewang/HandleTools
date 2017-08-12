@@ -23,6 +23,12 @@ namespace Show
             set { parent = value; }
         }
 
+
+        public string Parent2
+        {
+            get { return parent.ToString("X8"); }
+        }
+
         private IntPtr handle;
 
         public IntPtr Handle
@@ -76,6 +82,11 @@ namespace Show
             this.Handle = handle;
             this.Text = text;
             this.ClassName = className;
+        }
+
+        public static string getNodeShow(HandleInfo hinfo)
+        {
+            return "(" + hinfo.Index + "){" + hinfo.Parent + "}{"+ hinfo.Parent2 +"}[" + hinfo.Handle + "][" + hinfo.Handle2 + "]~" + hinfo.Text + "~" + hinfo.ClassName;
         }
 
     }

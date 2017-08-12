@@ -43,10 +43,10 @@ namespace Show
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button15;
         private Process p = new Process();
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox tbWindowText;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox tbWindowClass;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
@@ -122,6 +122,13 @@ namespace Show
         private Button button37;
         private Button button38;
         private Button button39;
+        private Button button40;
+        private Button button41;
+        private TextBox tbExclude;
+        private Label label5;
+        private Button btnFindNode;
+        private TextBox tbFindNode;
+        private Label label11;
         public IntPtr myControl;
         #endregion
 
@@ -262,15 +269,20 @@ namespace Show
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button15 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tbWindowText = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.button16 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tbWindowClass = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbExclude = new System.Windows.Forms.TextBox();
+            this.button40 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
+            this.button37 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -297,6 +309,8 @@ namespace Show
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button41 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
             this.tbDlgHandle = new System.Windows.Forms.TextBox();
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -320,6 +334,9 @@ namespace Show
             this.tbFullIndex = new System.Windows.Forms.TextBox();
             this.button33 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnFindNode = new System.Windows.Forms.Button();
+            this.tbFindNode = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tbFullPath = new System.Windows.Forms.TextBox();
@@ -338,9 +355,6 @@ namespace Show
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button37 = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
-            this.button39 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -359,7 +373,7 @@ namespace Show
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(367, 24);
+            this.button10.Location = new System.Drawing.Point(432, 59);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(119, 23);
             this.button10.TabIndex = 11;
@@ -368,7 +382,7 @@ namespace Show
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(212, 91);
+            this.button11.Location = new System.Drawing.Point(276, 132);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(80, 24);
             this.button11.TabIndex = 12;
@@ -395,16 +409,16 @@ namespace Show
             // 
             // tbWindowName
             // 
-            this.tbWindowName.Location = new System.Drawing.Point(78, 22);
+            this.tbWindowName.Location = new System.Drawing.Point(136, 60);
             this.tbWindowName.Name = "tbWindowName";
             this.tbWindowName.Size = new System.Drawing.Size(112, 21);
             this.tbWindowName.TabIndex = 15;
-            this.tbWindowName.Text = "Form1";
+            this.tbWindowName.Text = "TeamViewer";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 25);
+            this.label1.Location = new System.Drawing.Point(12, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 16;
@@ -444,13 +458,13 @@ namespace Show
             this.button15.Text = "WM_SETTEXT";
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
-            // textBox5
+            // tbWindowText
             // 
-            this.textBox5.Location = new System.Drawing.Point(77, 94);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(112, 21);
-            this.textBox5.TabIndex = 21;
-            this.textBox5.Text = "hello";
+            this.tbWindowText.Location = new System.Drawing.Point(135, 132);
+            this.tbWindowText.Name = "tbWindowText";
+            this.tbWindowText.Size = new System.Drawing.Size(112, 21);
+            this.tbWindowText.TabIndex = 21;
+            this.tbWindowText.Text = "hello";
             // 
             // textBox6
             // 
@@ -469,18 +483,18 @@ namespace Show
             this.button16.Text = "Click";
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
-            // textBox7
+            // tbWindowClass
             // 
-            this.textBox7.Location = new System.Drawing.Point(262, 24);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(99, 21);
-            this.textBox7.TabIndex = 24;
-            this.textBox7.Text = "null";
+            this.tbWindowClass.Location = new System.Drawing.Point(327, 61);
+            this.tbWindowClass.Name = "tbWindowClass";
+            this.tbWindowClass.Size = new System.Drawing.Size(99, 21);
+            this.tbWindowClass.TabIndex = 24;
+            this.tbWindowClass.Text = "null";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(210, 27);
+            this.label3.Location = new System.Drawing.Point(274, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 12);
             this.label3.TabIndex = 25;
@@ -488,7 +502,7 @@ namespace Show
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(386, 33);
+            this.button17.Location = new System.Drawing.Point(476, 33);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(85, 24);
             this.button17.TabIndex = 28;
@@ -497,7 +511,7 @@ namespace Show
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(298, 92);
+            this.button18.Location = new System.Drawing.Point(362, 133);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(80, 23);
             this.button18.TabIndex = 29;
@@ -506,7 +520,7 @@ namespace Show
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(387, 92);
+            this.button19.Location = new System.Drawing.Point(451, 133);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(100, 23);
             this.button19.TabIndex = 30;
@@ -518,6 +532,9 @@ namespace Show
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.tbExclude);
+            this.groupBox2.Controls.Add(this.button40);
             this.groupBox2.Controls.Add(this.button38);
             this.groupBox2.Controls.Add(this.button37);
             this.groupBox2.Controls.Add(this.button34);
@@ -542,18 +559,64 @@ namespace Show
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.labResult);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.textBox7);
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.tbWindowClass);
+            this.groupBox2.Controls.Add(this.tbWindowText);
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(695, 288);
+            this.groupBox2.Size = new System.Drawing.Size(695, 312);
             this.groupBox2.TabIndex = 32;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Main";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(107, 12);
+            this.label5.TabIndex = 65;
+            this.label5.Text = "Exclude Classes：";
+            // 
+            // tbExclude
+            // 
+            this.tbExclude.Location = new System.Drawing.Point(136, 25);
+            this.tbExclude.Name = "tbExclude";
+            this.tbExclude.Size = new System.Drawing.Size(290, 21);
+            this.tbExclude.TabIndex = 64;
+            this.tbExclude.Text = "tooltips_class32,IME";
+            // 
+            // button40
+            // 
+            this.button40.Location = new System.Drawing.Point(558, 24);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(120, 23);
+            this.button40.TabIndex = 63;
+            this.button40.Text = "EnumWindows2";
+            this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
+            // 
+            // button38
+            // 
+            this.button38.Location = new System.Drawing.Point(432, 276);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(120, 23);
+            this.button38.TabIndex = 62;
+            this.button38.Text = "Load Config";
+            this.button38.Visible = false;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
+            // 
+            // button37
+            // 
+            this.button37.Location = new System.Drawing.Point(558, 276);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(120, 23);
+            this.button37.TabIndex = 61;
+            this.button37.Text = "Save Config";
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
             // button34
             // 
-            this.button34.Location = new System.Drawing.Point(464, 126);
+            this.button34.Location = new System.Drawing.Point(528, 167);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(120, 23);
             this.button34.TabIndex = 56;
@@ -563,7 +626,7 @@ namespace Show
             // button31
             // 
             this.button31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button31.Location = new System.Drawing.Point(212, 126);
+            this.button31.Location = new System.Drawing.Point(276, 167);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(120, 23);
             this.button31.TabIndex = 36;
@@ -574,7 +637,7 @@ namespace Show
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(213, 206);
+            this.label9.Location = new System.Drawing.Point(277, 242);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 12);
             this.label9.TabIndex = 60;
@@ -582,7 +645,7 @@ namespace Show
             // 
             // button25
             // 
-            this.button25.Location = new System.Drawing.Point(465, 168);
+            this.button25.Location = new System.Drawing.Point(529, 204);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(120, 23);
             this.button25.TabIndex = 53;
@@ -593,7 +656,7 @@ namespace Show
             // button32
             // 
             this.button32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button32.Location = new System.Drawing.Point(338, 126);
+            this.button32.Location = new System.Drawing.Point(402, 167);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(120, 23);
             this.button32.TabIndex = 52;
@@ -603,7 +666,7 @@ namespace Show
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 97);
+            this.label7.Location = new System.Drawing.Point(12, 135);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 52;
@@ -612,7 +675,7 @@ namespace Show
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 60);
+            this.label6.Location = new System.Drawing.Point(12, 98);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 38;
@@ -620,7 +683,7 @@ namespace Show
             // 
             // tbChildName
             // 
-            this.tbChildName.Location = new System.Drawing.Point(262, 203);
+            this.tbChildName.Location = new System.Drawing.Point(326, 239);
             this.tbChildName.Name = "tbChildName";
             this.tbChildName.Size = new System.Drawing.Size(70, 21);
             this.tbChildName.TabIndex = 59;
@@ -629,7 +692,7 @@ namespace Show
             // tbWindowHandle
             // 
             this.tbWindowHandle.ForeColor = System.Drawing.Color.Red;
-            this.tbWindowHandle.Location = new System.Drawing.Point(78, 57);
+            this.tbWindowHandle.Location = new System.Drawing.Point(136, 95);
             this.tbWindowHandle.Name = "tbWindowHandle";
             this.tbWindowHandle.ReadOnly = true;
             this.tbWindowHandle.Size = new System.Drawing.Size(112, 21);
@@ -637,7 +700,7 @@ namespace Show
             // 
             // button29
             // 
-            this.button29.Location = new System.Drawing.Point(338, 205);
+            this.button29.Location = new System.Drawing.Point(402, 241);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(120, 23);
             this.button29.TabIndex = 58;
@@ -646,7 +709,7 @@ namespace Show
             // 
             // button28
             // 
-            this.button28.Location = new System.Drawing.Point(338, 168);
+            this.button28.Location = new System.Drawing.Point(402, 204);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(120, 23);
             this.button28.TabIndex = 57;
@@ -655,7 +718,7 @@ namespace Show
             // 
             // tbButtonNo
             // 
-            this.tbButtonNo.Location = new System.Drawing.Point(262, 168);
+            this.tbButtonNo.Location = new System.Drawing.Point(326, 204);
             this.tbButtonNo.Name = "tbButtonNo";
             this.tbButtonNo.Size = new System.Drawing.Size(70, 21);
             this.tbButtonNo.TabIndex = 55;
@@ -664,7 +727,7 @@ namespace Show
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(213, 168);
+            this.label8.Location = new System.Drawing.Point(277, 204);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 12);
             this.label8.TabIndex = 56;
@@ -672,7 +735,7 @@ namespace Show
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(492, 24);
+            this.button20.Location = new System.Drawing.Point(432, 24);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(120, 23);
             this.button20.TabIndex = 31;
@@ -683,7 +746,7 @@ namespace Show
             // labResult
             // 
             this.labResult.AutoSize = true;
-            this.labResult.Location = new System.Drawing.Point(210, 60);
+            this.labResult.Location = new System.Drawing.Point(277, 98);
             this.labResult.Name = "labResult";
             this.labResult.Size = new System.Drawing.Size(59, 12);
             this.labResult.TabIndex = 26;
@@ -746,7 +809,7 @@ namespace Show
             // labResult2
             // 
             this.labResult2.AutoSize = true;
-            this.labResult2.Location = new System.Drawing.Point(506, 40);
+            this.labResult2.Location = new System.Drawing.Point(531, 75);
             this.labResult2.Name = "labResult2";
             this.labResult2.Size = new System.Drawing.Size(53, 12);
             this.labResult2.TabIndex = 27;
@@ -759,13 +822,15 @@ namespace Show
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(507, 441);
+            this.groupBox3.Size = new System.Drawing.Size(507, 465);
             this.groupBox3.TabIndex = 49;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Config";
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl1.Controls.Add(this.tabHome);
             this.tabControl1.Controls.Add(this.tabConfig);
             this.tabControl1.Controls.Add(this.tabBrowser);
@@ -774,7 +839,7 @@ namespace Show
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(715, 482);
+            this.tabControl1.Size = new System.Drawing.Size(715, 506);
             this.tabControl1.TabIndex = 50;
             // 
             // tabHome
@@ -784,16 +849,16 @@ namespace Show
             this.tabHome.Location = new System.Drawing.Point(4, 22);
             this.tabHome.Name = "tabHome";
             this.tabHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHome.Size = new System.Drawing.Size(707, 456);
+            this.tabHome.Size = new System.Drawing.Size(707, 480);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
             // 
             // groupBox6
             // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.button41);
             this.groupBox6.Controls.Add(this.button39);
             this.groupBox6.Controls.Add(this.tbDlgHandle);
             this.groupBox6.Controls.Add(this.button14);
@@ -809,16 +874,34 @@ namespace Show
             this.groupBox6.Controls.Add(this.button21);
             this.groupBox6.Controls.Add(this.textBox8);
             this.groupBox6.Controls.Add(this.button22);
-            this.groupBox6.Location = new System.Drawing.Point(6, 300);
+            this.groupBox6.Location = new System.Drawing.Point(6, 324);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(695, 150);
             this.groupBox6.TabIndex = 51;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Child";
             // 
+            // button41
+            // 
+            this.button41.Location = new System.Drawing.Point(298, 31);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(80, 23);
+            this.button41.TabIndex = 63;
+            this.button41.Text = "GetParent";
+            this.button41.Click += new System.EventHandler(this.button41_Click);
+            // 
+            // button39
+            // 
+            this.button39.Location = new System.Drawing.Point(559, 109);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(120, 23);
+            this.button39.TabIndex = 62;
+            this.button39.Text = "Save Config";
+            this.button39.Click += new System.EventHandler(this.button39_Click);
+            // 
             // tbDlgHandle
             // 
-            this.tbDlgHandle.Location = new System.Drawing.Point(298, 33);
+            this.tbDlgHandle.Location = new System.Drawing.Point(388, 33);
             this.tbDlgHandle.Name = "tbDlgHandle";
             this.tbDlgHandle.Size = new System.Drawing.Size(80, 21);
             this.tbDlgHandle.TabIndex = 37;
@@ -829,7 +912,7 @@ namespace Show
             this.tabConfig.Controls.Add(this.groupBox5);
             this.tabConfig.Location = new System.Drawing.Point(4, 22);
             this.tabConfig.Name = "tabConfig";
-            this.tabConfig.Size = new System.Drawing.Size(707, 456);
+            this.tabConfig.Size = new System.Drawing.Size(707, 480);
             this.tabConfig.TabIndex = 4;
             this.tabConfig.Text = "Config";
             this.tabConfig.UseVisualStyleBackColor = true;
@@ -871,7 +954,7 @@ namespace Show
             this.groupBox5.Controls.Add(this.panel1);
             this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(505, 442);
+            this.groupBox5.Size = new System.Drawing.Size(505, 466);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Config";
@@ -890,7 +973,7 @@ namespace Show
             this.tabBrowser.Controls.Add(this.groupBox4);
             this.tabBrowser.Location = new System.Drawing.Point(4, 22);
             this.tabBrowser.Name = "tabBrowser";
-            this.tabBrowser.Size = new System.Drawing.Size(707, 456);
+            this.tabBrowser.Size = new System.Drawing.Size(707, 480);
             this.tabBrowser.TabIndex = 2;
             this.tabBrowser.Text = "Browser";
             this.tabBrowser.UseVisualStyleBackColor = true;
@@ -1045,6 +1128,9 @@ namespace Show
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.btnFindNode);
+            this.groupBox4.Controls.Add(this.tbFindNode);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.treeView1);
             this.groupBox4.Controls.Add(this.tbFullPath);
@@ -1055,10 +1141,38 @@ namespace Show
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Browser";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 23);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 12);
+            this.label11.TabIndex = 44;
+            this.label11.Text = "Search:";
+            // 
+            // btnFindNode
+            // 
+            this.btnFindNode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFindNode.Location = new System.Drawing.Point(333, 20);
+            this.btnFindNode.Name = "btnFindNode";
+            this.btnFindNode.Size = new System.Drawing.Size(160, 23);
+            this.btnFindNode.TabIndex = 43;
+            this.btnFindNode.Text = "FindNode";
+            this.btnFindNode.UseVisualStyleBackColor = true;
+            this.btnFindNode.Click += new System.EventHandler(this.btnFindNode_Click);
+            // 
+            // tbFindNode
+            // 
+            this.tbFindNode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFindNode.Location = new System.Drawing.Point(71, 20);
+            this.tbFindNode.Name = "tbFindNode";
+            this.tbFindNode.Size = new System.Drawing.Size(242, 21);
+            this.tbFindNode.TabIndex = 42;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 31);
+            this.label10.Location = new System.Drawing.Point(6, 57);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 12);
             this.label10.TabIndex = 41;
@@ -1069,9 +1183,9 @@ namespace Show
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(6, 55);
+            this.treeView1.Location = new System.Drawing.Point(6, 83);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(487, 384);
+            this.treeView1.Size = new System.Drawing.Size(487, 356);
             this.treeView1.TabIndex = 32;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.Click += new System.EventHandler(this.treeView1_Click);
@@ -1080,7 +1194,7 @@ namespace Show
             // 
             this.tbFullPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFullPath.Location = new System.Drawing.Point(71, 28);
+            this.tbFullPath.Location = new System.Drawing.Point(71, 53);
             this.tbFullPath.Name = "tbFullPath";
             this.tbFullPath.Size = new System.Drawing.Size(422, 21);
             this.tbFullPath.TabIndex = 37;
@@ -1092,7 +1206,7 @@ namespace Show
             this.tabConfig2.Location = new System.Drawing.Point(4, 22);
             this.tabConfig2.Name = "tabConfig2";
             this.tabConfig2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConfig2.Size = new System.Drawing.Size(707, 456);
+            this.tabConfig2.Size = new System.Drawing.Size(707, 480);
             this.tabConfig2.TabIndex = 1;
             this.tabConfig2.Text = "Config2";
             this.tabConfig2.UseVisualStyleBackColor = true;
@@ -1114,7 +1228,7 @@ namespace Show
             this.tabTest2.Controls.Add(this.groupBox1);
             this.tabTest2.Location = new System.Drawing.Point(4, 22);
             this.tabTest2.Name = "tabTest2";
-            this.tabTest2.Size = new System.Drawing.Size(707, 456);
+            this.tabTest2.Size = new System.Drawing.Size(707, 480);
             this.tabTest2.TabIndex = 3;
             this.tabTest2.Text = "Test2";
             this.tabTest2.UseVisualStyleBackColor = true;
@@ -1236,38 +1350,10 @@ namespace Show
             this.textBox2.TabIndex = 10;
             this.textBox2.Text = "textBox2";
             // 
-            // button37
-            // 
-            this.button37.Location = new System.Drawing.Point(559, 249);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(120, 23);
-            this.button37.TabIndex = 61;
-            this.button37.Text = "Save Config";
-            this.button37.Click += new System.EventHandler(this.button37_Click);
-            // 
-            // button38
-            // 
-            this.button38.Location = new System.Drawing.Point(433, 249);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(120, 23);
-            this.button38.TabIndex = 62;
-            this.button38.Text = "Load Config";
-            this.button38.Visible = false;
-            this.button38.Click += new System.EventHandler(this.button38_Click);
-            // 
-            // button39
-            // 
-            this.button39.Location = new System.Drawing.Point(559, 109);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(120, 23);
-            this.button39.TabIndex = 62;
-            this.button39.Text = "Save Config";
-            this.button39.Click += new System.EventHandler(this.button39_Click);
-            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
-            this.ClientSize = new System.Drawing.Size(720, 487);
+            this.ClientSize = new System.Drawing.Size(723, 512);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "HandleTools";
@@ -1311,11 +1397,11 @@ namespace Show
         private void Form1_Load(object sender, System.EventArgs e)
         {
             tbWindowName.Text = "TeamViewer";
-            LoadConfig(groupBox2,"main");
-            LoadConfig(groupBox6,"child");
+            LoadConfig(groupBox2, "main");
+            LoadConfig(groupBox6, "child");
 
             button31_Click(sender, e);
-            btnLoadConfig_Click(sender,e);
+            btnLoadConfig_Click(sender, e);
         }
 
         private void button1_Click(object sender, System.EventArgs e)
@@ -1364,7 +1450,7 @@ namespace Show
 
         private void button10_Click(object sender, System.EventArgs e)
         {
-            string lpClassName = string.IsNullOrEmpty(textBox7.Text) ? null : textBox7.Text;
+            string lpClassName = string.IsNullOrEmpty(tbWindowClass.Text) ? null : tbWindowClass.Text;
             string lpWindowName = string.IsNullOrEmpty(tbWindowName.Text) ? null : tbWindowName.Text;
             myhwnd = FindWindow(lpClassName, lpWindowName);
 
@@ -1381,7 +1467,7 @@ namespace Show
 
         private void button11_Click(object sender, System.EventArgs e)
         {
-            SendMessage(myhwnd, WM_SETTEXT, 0, textBox5.Text);
+            SendMessage(myhwnd, WM_SETTEXT, 0, tbWindowText.Text);
             showResult1(myhwnd.ToInt32(), ((Button)sender).Text);
         }
 
@@ -1413,7 +1499,7 @@ namespace Show
         }
 
 
-       
+
 
         private void button16_Click(object sender, System.EventArgs e)
         {
@@ -1422,7 +1508,7 @@ namespace Show
             showResult2(myControl.ToInt32(), ((Button)sender).Text);
         }
 
-        private void showResult(Control lab,  int result, string msg = null)
+        private void showResult(Control lab, int result, string msg = null)
         {
             string title = "";
             if (!String.IsNullOrEmpty(msg))
@@ -1448,7 +1534,8 @@ namespace Show
             showResult(labResult, result, msg);
         }
 
-        private void showResult2(int result,string msg="") {
+        private void showResult2(int result, string msg = "")
+        {
             showResult(labResult2, result, msg);
         }
 
@@ -1460,7 +1547,7 @@ namespace Show
         private void button17_Click(object sender, System.EventArgs e)
         {
             myhwnd = new IntPtr(Convert.ToInt32(tbDlgHandle.Text));
-            showResult2(myhwnd.ToInt32(),((Button)sender).Text);
+            showResult2(myhwnd.ToInt32(), ((Button)sender).Text);
         }
 
         private void button18_Click(object sender, System.EventArgs e)
@@ -1475,13 +1562,45 @@ namespace Show
             showResult1(myhwnd.ToInt32(), ((Button)sender).Text);
         }
 
+
+        private ArrayList tlist = new ArrayList();
         private void button20_Click(object sender, EventArgs e)
         {
-            windowName = tbWindowName.Text;
-            CallBack myCallBack = new CallBack(Report);
-            EnumWindows(myCallBack, 0);
-
+            ArrayList plist = GetTreeViewData();
+            tlist = plist;
+            CreateTreeView(IntPtr.Zero, plist);
             showResult1(1, ((Button)sender).Text);
+        }
+
+        private ArrayList GetTreeViewData()
+        {
+            Win32Service ws = new Win32Service();
+            ws.exlude.Clear();
+            if (!string.IsNullOrEmpty(tbExclude.Text))
+            {
+                string[] xs = tbExclude.Text.Split(',');
+                ws.exlude.AddRange(xs);
+            }
+
+            ArrayList plist = ws.getAllTopWindows();
+            for (int i = 0; i < plist.Count; i++)
+            {
+                HandleInfo hinfo = (HandleInfo)plist[i];
+                if (hinfo.Handle == new IntPtr(1592676))
+                {
+                    //ArrayList clist = ws.getAllChildrenWindows(hinfo.Handle);
+                    //plist.AddRange(clist);
+                }
+            }
+
+            //Console.Clear();
+            for (int i = 0; i < plist.Count; i++)
+            {
+                HandleInfo hinfo = plist[i] as HandleInfo;
+                hinfo.Index = i;
+                Console.WriteLine(HandleInfo.getNodeShow(hinfo));
+            }
+            return plist;
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1629,7 +1748,7 @@ namespace Show
             var className = Marshal.PtrToStringAnsi(lpString2);
 
             Console.WriteLine("********" + text + "********" + className);
-            list.Add(new HandleInfo(new IntPtr(hwnd), text,className));
+            list.Add(new HandleInfo(new IntPtr(hwnd), text, className));
 
             return true;
         }
@@ -1781,7 +1900,7 @@ namespace Show
             IntPtr childHwnd = FindWindowEx(myhwnd, IntPtr.Zero, null, tbChildName.Text);   //获得按钮的句柄  
             //SendMessage(childHwnd, BM_CLICK, 0, "0");     //发送点击按钮的消息 
             SendMessage(childHwnd, BM_CLICK, 0, "0");     //发送点击按钮的消息  
- 
+
             int er1 = (int)GetLastError();
             Console.WriteLine(er1);
 
@@ -1792,49 +1911,63 @@ namespace Show
 
         private void button30_Click(object sender, EventArgs e)
         {
-      
             Win32Service service = new Win32Service();
-            ArrayList list = service.getChildWindows(myhwnd);
-            treeView1.Nodes.Clear();
-            //treeView1.Nodes[
-            //treeView1.
-            for (int i = 0; i < list.Count; i++)
-            {
-                HandleInfo hinfo = (HandleInfo)list[i];
-                TreeNode pnode = new TreeNode();
-                pnode.Text ="("+i.ToString()+ ")["+ hinfo.Handle +"][" +  hinfo.Handle.ToString("X8") + "]~" + hinfo.Text + "~" + hinfo.ClassName;
-                pnode.Tag = hinfo;
-                pnode.Name = hinfo.Handle.ToString();
-                //pnode.
-                treeView1.Nodes.Add(pnode);
-                AddChildnode( pnode);
-            }
+            ArrayList data = service.getAllChildrenWindows(myhwnd);
+
+            //return;
+            CreateTreeView(myhwnd, data);
 
             showResult3(myhwnd.ToInt32(), ((Button)sender).Text);
         }
 
-
-        public void AddChildnode(TreeNode pnode)
+        private void CreateTreeView(IntPtr hwnd, ArrayList data)
         {
-            HandleInfo thieInfo = (HandleInfo)pnode.Tag;
-            Win32Service service = new Win32Service();
-            ArrayList list = service.getChildWindows(thieInfo.Handle);
+            var service = new Win32Service();
+            ArrayList list = service.getChildWindows(myhwnd, data);
+            treeView1.Nodes.Clear();
             for (int i = 0; i < list.Count; i++)
             {
                 HandleInfo hinfo = (HandleInfo)list[i];
-                    TreeNode cnode = new TreeNode();
-                    cnode.Text = "("+i.ToString()+ ")[" + hinfo.Handle + "][" + hinfo.Handle.ToString("X8") + "]~" + hinfo.Text + "~" + hinfo.ClassName;
-                    cnode.Tag = hinfo;
-                    cnode.Name = hinfo.Handle.ToString();
-                    pnode.Nodes.Add(cnode);
-                    AddChildnode( cnode);
+                hinfo.Index = i;
+                TreeNode pnode = new TreeNode();
+                pnode.Text = HandleInfo.getNodeShow(hinfo);
+                pnode.Tag = hinfo;
+                pnode.Name = hinfo.Handle.ToString();
+                //pnode.
+                treeView1.Nodes.Add(pnode);
+                AddChildnode(pnode, data);
+            }
+        }
+
+   
+
+
+        public void AddChildnode(TreeNode pnode,ArrayList data)
+        {
+            HandleInfo thieInfo = (HandleInfo)pnode.Tag;
+            Win32Service service = new Win32Service();
+            if (thieInfo.Handle.ToInt32() == 2557448)
+            {
+                string s = "";
+            }
+            ArrayList list = service.getChildWindows(thieInfo.Handle,data);
+            for (int i = 0; i < list.Count; i++)
+            {
+                HandleInfo hinfo = (HandleInfo)list[i];
+                hinfo.Index = i;
+                TreeNode cnode = new TreeNode();
+                cnode.Text = HandleInfo.getNodeShow(hinfo);
+                cnode.Tag = hinfo;
+                cnode.Name = hinfo.Handle.ToString();
+                pnode.Nodes.Add(cnode);
+                AddChildnode(cnode,data);
             }
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode node =  e.Node;
-            HandleInfo hinfo= (HandleInfo)node.Tag;
+            TreeNode node = e.Node;
+            HandleInfo hinfo = (HandleInfo)node.Tag;
             Console.WriteLine(node.FullPath);
 
             tbFullPath.Text = node.FullPath;
@@ -1896,7 +2029,8 @@ namespace Show
         public const Int32 AW_SLIDE = 0x00040000;           //使用滑动类型。缺省则为滚动动画类型。当使用AW_CENTER标志时，这个标志就被忽略。
         public const Int32 AW_BLEND = 0x00080000;           //使用淡出效果。只有当hWnd为顶层窗口的时候才可以使用此标志。
 
-        private IntPtr getHandleByFullIndex(string fullPath) {
+        private IntPtr getHandleByFullIndex(string fullPath)
+        {
             TreeNode node = getNodeByFullIndex(fullPath);
             HandleInfo hinfo = (HandleInfo)node.Tag;
             return hinfo.Handle;
@@ -1951,7 +2085,7 @@ namespace Show
                 panel.Width = 480;
                 panel.Height = 34;
                 panel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-               
+
                 panel.BorderStyle = BorderStyle.FixedSingle;
 
                 tb = new TextBox();
@@ -2070,7 +2204,7 @@ namespace Show
                 //tbNoFullIndex_
                 Control[] cs = panel.Controls.Find("tbNoFullIndex_" + i, true);
                 string fullIndex = ((TextBox)cs[0]).Text;
-                if (cs.Length==0 || string.IsNullOrEmpty(fullIndex))
+                if (cs.Length == 0 || string.IsNullOrEmpty(fullIndex))
                 {
                     continue;
                 }
@@ -2103,7 +2237,7 @@ namespace Show
             root.AppendChild(invoice);
 
             xmlDoc.Save("config.xml");
-            
+
         }
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
@@ -2137,7 +2271,7 @@ namespace Show
                 }
 
                 cs = panel.Controls.Find("tbNoLabel_" + i, true);
-                if (cs.Length>0)
+                if (cs.Length > 0)
                 {
                     cs[0].Text = elem.GetAttribute("label");
                 }
@@ -2252,7 +2386,7 @@ namespace Show
                 {
                     XmlElement elem = xmlDoc.CreateElement("elem");
                     elem.SetAttribute("name", con.Name);
-                    elem.SetAttribute("text",con.Text);
+                    elem.SetAttribute("text", con.Text);
                     //elem.InnerText = con.Text;
                     saveNode.AppendChild(elem);
                 }
@@ -2308,5 +2442,54 @@ namespace Show
             SaveConfig(groupBox6, "child");
         }
 
+        private void button40_Click(object sender, EventArgs e)
+        {
+            //IntPtr ParentHandle = FindWindow(null, "无标题 - 记事本");
+            Win32Service ws = new Win32Service();
+            ArrayList list = ws.getChildrenWindows(IntPtr.Zero);
+            CreateTreeView(IntPtr.Zero, list);
+
+            showResult1(list.Count, ((Button)sender).Text);
+        }
+
+        [DllImport("user32.dll", EntryPoint = "GetParent")]
+        public static extern int GetParent(
+            int hwnd
+        );
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            int parent = GetParent(Convert.ToInt32(textBox4.Text));
+            textBox6.Text = parent + "-" + parent.ToString("X8");
+        }
+
+        private void btnFindNode_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbFindNode.Text))
+            {
+                CreateTreeView(IntPtr.Zero, tlist);
+            }
+            else 
+            {
+                List<TreeNode> otree = new List<TreeNode>();
+                TreeNodeCollection cs = treeView1.Nodes;
+                foreach (TreeNode node in cs)
+                {
+                    otree.Add((TreeNode)node.Clone());
+                }
+
+                treeView1.Nodes.Clear();
+                for (int i = 0; i < otree.Count; i++)
+                {
+                    TreeNode node = otree[i];
+                    HandleInfo hinfo = node.Tag as HandleInfo;
+                    if (hinfo.Text.Contains(tbFindNode.Text))
+                    {
+                        treeView1.Nodes.Add(node);
+                    }
+                }
+            }
+           
+        }
     }
 }

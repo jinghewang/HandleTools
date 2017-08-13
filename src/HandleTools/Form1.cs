@@ -1834,9 +1834,9 @@ namespace Show
         private ArrayList tlist = new ArrayList();
         private void button20_Click(object sender, EventArgs e)
         {
+            myhwnd = IntPtr.Zero;
             Win32Service ws = new Win32Service();
             InitExclude(ws);
-
             ArrayList plist = GetTreeViewData(ws);
             tlist = plist;
             CreateTreeView(IntPtr.Zero, plist);
@@ -2068,7 +2068,7 @@ namespace Show
             showResult3(myhwnd.ToInt32(), ((Button)sender).Text);
         }
 
-        private void CreateTreeView(IntPtr rhwnd, ArrayList data)
+        private void CreateTreeView(IntPtr rhwnd, ArrayList data,string filter=null)
         {
             var service = new Win32Service();
             ArrayList list = service.getChildWindows(rhwnd, data);
@@ -2081,8 +2081,19 @@ namespace Show
                 pnode.Text = HandleInfo.getNodeShow(hinfo);
                 pnode.Tag = hinfo;
                 pnode.Name = hinfo.Handle.ToString();
-                //pnode.
-                treeView1.Nodes.Add(pnode);
+
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    if (hinfo.Text.Contains(filter))
+                    {
+                         treeView1.Nodes.Add(pnode);
+                    }
+                }
+                else
+                {
+                    treeView1.Nodes.Add(pnode);
+                }
+
                 AddChildnode(pnode, data);
             }
         }
@@ -2597,6 +2608,7 @@ namespace Show
 
         private void button40_Click(object sender, EventArgs e)
         {
+            myhwnd = IntPtr.Zero;
             Win32Service ws = new Win32Service();
             InitExclude(ws);
             ArrayList plist = ws.getEnumWindows2(IntPtr.Zero);
@@ -2619,35 +2631,15 @@ namespace Show
 
         private void btnFindNode_Click(object sender, EventArgs e)
         {
-            CreateTreeView(myhwnd, tlist);
-            if (!string.IsNullOrEmpty(tbFindNode.Text))
-            {
-                List<TreeNode> otree = new List<TreeNode>();
-                TreeNodeCollection cs = treeView1.Nodes;
-                foreach (TreeNode node in cs)
-                {
-                    otree.Add((TreeNode)node.Clone());
-                }
-
-                treeView1.Nodes.Clear();
-                for (int i = 0; i < otree.Count; i++)
-                {
-                    TreeNode node = otree[i];
-                    HandleInfo hinfo = node.Tag as HandleInfo;
-                    if (hinfo.Text.Contains(tbFindNode.Text))
-                    {
-                        treeView1.Nodes.Add(node);
-                    }
-                }
-                treeView1.ExpandAll();
-            }
-           
+            CreateTreeView(myhwnd, tlist, tbFindNode.Text);
+            //treeView1.ExpandAll();
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            myhwnd = IntPtr.Zero;
             Win32Service ws = new Win32Service();
-            //InitExclude(ws);
+            InitExclude(ws);
             ArrayList plist = ws.getEnumWindows();
             tlist = plist;
             CreateTreeView(IntPtr.Zero, plist);
@@ -2656,8 +2648,10 @@ namespace Show
 
         private void button27_Click(object sender, EventArgs e)
         {
-            Win32Service service = new Win32Service();
-            ArrayList plist = service.getEnumChildWindows(IntPtr.Zero);
+            myhwnd = IntPtr.Zero;
+            Win32Service ws = new Win32Service();
+            InitExclude(ws);
+            ArrayList plist = ws.getEnumChildWindows(IntPtr.Zero);
             tlist = plist;
             CreateTreeView(IntPtr.Zero, plist);
             showResult3(myhwnd.ToInt32(), ((Button)sender).Text);

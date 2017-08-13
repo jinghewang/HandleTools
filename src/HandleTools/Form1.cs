@@ -15,6 +15,11 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Xml;
+using System.Net;
+using System.IO;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Show
 {
@@ -27,10 +32,10 @@ namespace Show
 
     public class Form1 : System.Windows.Forms.Form
     {
+        private IContainer components;
 
         #region 声名变量
 
-        private System.ComponentModel.Container components = null;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
@@ -51,7 +56,7 @@ namespace Show
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
-        private GroupBox groupBox2;
+        private GroupBox gbMain;
         private Label labResult2;
         private Label labResult;
         private Button button20;
@@ -60,7 +65,7 @@ namespace Show
         private TextBox textBox8;
         private Label label6;
         private TextBox tbWindowHandle;
-        private GroupBox groupBox3;
+        private GroupBox gbWindow;
         private TabControl tabControl1;
         private TabPage tabHome;
         private TabPage tabWindow;
@@ -92,15 +97,15 @@ namespace Show
         private Button button8;
         private Button button9;
         private TextBox textBox2;
-        private GroupBox groupBox4;
+        private GroupBox gbBrowser;
         private Label label10;
         private TabPage tabConfig;
-        private GroupBox groupBox5;
+        private GroupBox gbConfig;
         private Button button32;
         private Button btnLoadConfig;
         private Button btnSaveConfig;
         private Button button34;
-        private GroupBox groupBox6;
+        private GroupBox gbChild;
         private TextBox tbNodeHandle;
         private Button button33;
         private TextBox tbSetHandle;
@@ -135,6 +140,16 @@ namespace Show
         private Button btnTo10;
         private TextBox tbText16;
         private TextBox tbText10;
+        private Button button6;
+        private TabPage tabInvoice;
+        private GroupBox groupBox2;
+        private Button button23;
+        private GroupBox groupBox3;
+        private Timer timer1;
+        private DataGridView dataGridView1;
+        private TextBox tbInvoiceUrl;
+        private Label label14;
+        private Button btnPrintInvoice;
         public IntPtr myControl;
         #endregion
 
@@ -265,6 +280,7 @@ namespace Show
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -283,10 +299,10 @@ namespace Show
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button38 = new System.Windows.Forms.Button();
+            this.gbMain = new System.Windows.Forms.GroupBox();
             this.button30 = new System.Windows.Forms.Button();
             this.button37 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.button25 = new System.Windows.Forms.Button();
@@ -311,12 +327,15 @@ namespace Show
             this.button22 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.labResult2 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gbWindow = new System.Windows.Forms.GroupBox();
             this.button27 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gbChild = new System.Windows.Forms.GroupBox();
+            this.tbParentHandle = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbDlgHandle = new System.Windows.Forms.TextBox();
             this.button41 = new System.Windows.Forms.Button();
             this.button39 = new System.Windows.Forms.Button();
             this.tbSetHandle = new System.Windows.Forms.TextBox();
@@ -324,9 +343,10 @@ namespace Show
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnLoadConfig = new System.Windows.Forms.Button();
             this.btnSaveConfig = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.gbConfig = new System.Windows.Forms.GroupBox();
             this.tabWindow = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabBrowser = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.button36 = new System.Windows.Forms.Button();
@@ -341,17 +361,26 @@ namespace Show
             this.label4 = new System.Windows.Forms.Label();
             this.tbFullIndex = new System.Windows.Forms.TextBox();
             this.button33 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.gbBrowser = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnFindNode = new System.Windows.Forms.Button();
             this.tbFindNode = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tbFullPath = new System.Windows.Forms.TextBox();
+            this.tabInvoice = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button23 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tbInvoiceUrl = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabTest2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnTo16 = new System.Windows.Forms.Button();
+            this.btnTo10 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.tbText16 = new System.Windows.Forms.TextBox();
+            this.btnTo16 = new System.Windows.Forms.Button();
+            this.tbText10 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -361,24 +390,25 @@ namespace Show
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbParentHandle = new System.Windows.Forms.TextBox();
-            this.tbDlgHandle = new System.Windows.Forms.TextBox();
-            this.tbText10 = new System.Windows.Forms.TextBox();
-            this.tbText16 = new System.Windows.Forms.TextBox();
-            this.btnTo10 = new System.Windows.Forms.Button();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnPrintInvoice = new System.Windows.Forms.Button();
+            this.gbMain.SuspendLayout();
+            this.gbWindow.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.gbChild.SuspendLayout();
             this.tabConfig.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabWindow.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tabBrowser.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.gbBrowser.SuspendLayout();
+            this.tabInvoice.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabTest2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -538,52 +568,42 @@ namespace Show
             this.button19.Text = "SW_SHOWNORMAL";
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
-            // groupBox2
+            // gbMain
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.gbMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.button30);
-            this.groupBox2.Controls.Add(this.button37);
-            this.groupBox2.Controls.Add(this.button38);
-            this.groupBox2.Controls.Add(this.button34);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.button25);
-            this.groupBox2.Controls.Add(this.button32);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.tbChildName);
-            this.groupBox2.Controls.Add(this.tbWindowHandle);
-            this.groupBox2.Controls.Add(this.button29);
-            this.groupBox2.Controls.Add(this.button28);
-            this.groupBox2.Controls.Add(this.tbButtonNo);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.tbWindowName);
-            this.groupBox2.Controls.Add(this.button10);
-            this.groupBox2.Controls.Add(this.button19);
-            this.groupBox2.Controls.Add(this.button11);
-            this.groupBox2.Controls.Add(this.button18);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.labResult);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.tbWindowClass);
-            this.groupBox2.Controls.Add(this.tbWindowText);
-            this.groupBox2.Location = new System.Drawing.Point(6, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(695, 284);
-            this.groupBox2.TabIndex = 32;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Main";
-            // 
-            // button38
-            // 
-            this.button38.Location = new System.Drawing.Point(433, 240);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(120, 23);
-            this.button38.TabIndex = 62;
-            this.button38.Text = "Load Config";
-            this.button38.Visible = false;
-            this.button38.Click += new System.EventHandler(this.button38_Click);
+            this.gbMain.Controls.Add(this.button30);
+            this.gbMain.Controls.Add(this.button37);
+            this.gbMain.Controls.Add(this.button38);
+            this.gbMain.Controls.Add(this.button34);
+            this.gbMain.Controls.Add(this.label9);
+            this.gbMain.Controls.Add(this.button25);
+            this.gbMain.Controls.Add(this.button32);
+            this.gbMain.Controls.Add(this.label7);
+            this.gbMain.Controls.Add(this.label6);
+            this.gbMain.Controls.Add(this.tbChildName);
+            this.gbMain.Controls.Add(this.tbWindowHandle);
+            this.gbMain.Controls.Add(this.button29);
+            this.gbMain.Controls.Add(this.button28);
+            this.gbMain.Controls.Add(this.tbButtonNo);
+            this.gbMain.Controls.Add(this.label8);
+            this.gbMain.Controls.Add(this.tbWindowName);
+            this.gbMain.Controls.Add(this.button10);
+            this.gbMain.Controls.Add(this.button19);
+            this.gbMain.Controls.Add(this.button11);
+            this.gbMain.Controls.Add(this.button18);
+            this.gbMain.Controls.Add(this.label1);
+            this.gbMain.Controls.Add(this.labResult);
+            this.gbMain.Controls.Add(this.label3);
+            this.gbMain.Controls.Add(this.tbWindowClass);
+            this.gbMain.Controls.Add(this.tbWindowText);
+            this.gbMain.Location = new System.Drawing.Point(6, 6);
+            this.gbMain.Name = "gbMain";
+            this.gbMain.Size = new System.Drawing.Size(695, 284);
+            this.gbMain.TabIndex = 32;
+            this.gbMain.TabStop = false;
+            this.gbMain.Text = "Main";
             // 
             // button30
             // 
@@ -604,6 +624,16 @@ namespace Show
             this.button37.TabIndex = 61;
             this.button37.Text = "Save Config";
             this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
+            // button38
+            // 
+            this.button38.Location = new System.Drawing.Point(433, 240);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(120, 23);
+            this.button38.TabIndex = 62;
+            this.button38.Text = "Load Config";
+            this.button38.Visible = false;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
             // button34
             // 
@@ -821,22 +851,22 @@ namespace Show
             this.labResult2.TabIndex = 27;
             this.labResult2.Text = "Result2:";
             // 
-            // groupBox3
+            // gbWindow
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.gbWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.cbMultiLevel);
-            this.groupBox3.Controls.Add(this.tbInclude);
-            this.groupBox3.Controls.Add(this.tbExclude);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(6, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(507, 467);
-            this.groupBox3.TabIndex = 49;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Window";
+            this.gbWindow.Controls.Add(this.cbMultiLevel);
+            this.gbWindow.Controls.Add(this.tbInclude);
+            this.gbWindow.Controls.Add(this.tbExclude);
+            this.gbWindow.Controls.Add(this.label5);
+            this.gbWindow.Controls.Add(this.label12);
+            this.gbWindow.Location = new System.Drawing.Point(6, 6);
+            this.gbWindow.Name = "gbWindow";
+            this.gbWindow.Size = new System.Drawing.Size(507, 467);
+            this.gbWindow.TabIndex = 49;
+            this.gbWindow.TabStop = false;
+            this.gbWindow.Text = "Window";
             // 
             // button27
             // 
@@ -867,6 +897,7 @@ namespace Show
             this.tabControl1.Controls.Add(this.tabConfig);
             this.tabControl1.Controls.Add(this.tabWindow);
             this.tabControl1.Controls.Add(this.tabBrowser);
+            this.tabControl1.Controls.Add(this.tabInvoice);
             this.tabControl1.Controls.Add(this.tabTest2);
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
             this.tabControl1.Name = "tabControl1";
@@ -876,8 +907,8 @@ namespace Show
             // 
             // tabHome
             // 
-            this.tabHome.Controls.Add(this.groupBox6);
-            this.tabHome.Controls.Add(this.groupBox2);
+            this.tabHome.Controls.Add(this.gbChild);
+            this.tabHome.Controls.Add(this.gbMain);
             this.tabHome.Location = new System.Drawing.Point(4, 22);
             this.tabHome.Name = "tabHome";
             this.tabHome.Padding = new System.Windows.Forms.Padding(3);
@@ -886,35 +917,60 @@ namespace Show
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
             // 
-            // groupBox6
+            // gbChild
             // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.gbChild.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox6.Controls.Add(this.tbParentHandle);
-            this.groupBox6.Controls.Add(this.label13);
-            this.groupBox6.Controls.Add(this.tbDlgHandle);
-            this.groupBox6.Controls.Add(this.button41);
-            this.groupBox6.Controls.Add(this.button39);
-            this.groupBox6.Controls.Add(this.button14);
-            this.groupBox6.Controls.Add(this.tbSetHandle);
-            this.groupBox6.Controls.Add(this.textBox6);
-            this.groupBox6.Controls.Add(this.button15);
-            this.groupBox6.Controls.Add(this.button16);
-            this.groupBox6.Controls.Add(this.label2);
-            this.groupBox6.Controls.Add(this.tbDlgId);
-            this.groupBox6.Controls.Add(this.labResult2);
-            this.groupBox6.Controls.Add(this.button13);
-            this.groupBox6.Controls.Add(this.button17);
-            this.groupBox6.Controls.Add(this.button12);
-            this.groupBox6.Controls.Add(this.button21);
-            this.groupBox6.Controls.Add(this.textBox8);
-            this.groupBox6.Controls.Add(this.button22);
-            this.groupBox6.Location = new System.Drawing.Point(6, 296);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(695, 180);
-            this.groupBox6.TabIndex = 51;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Child";
+            this.gbChild.Controls.Add(this.tbParentHandle);
+            this.gbChild.Controls.Add(this.label13);
+            this.gbChild.Controls.Add(this.tbDlgHandle);
+            this.gbChild.Controls.Add(this.button41);
+            this.gbChild.Controls.Add(this.button39);
+            this.gbChild.Controls.Add(this.button14);
+            this.gbChild.Controls.Add(this.tbSetHandle);
+            this.gbChild.Controls.Add(this.textBox6);
+            this.gbChild.Controls.Add(this.button15);
+            this.gbChild.Controls.Add(this.button16);
+            this.gbChild.Controls.Add(this.label2);
+            this.gbChild.Controls.Add(this.tbDlgId);
+            this.gbChild.Controls.Add(this.labResult2);
+            this.gbChild.Controls.Add(this.button13);
+            this.gbChild.Controls.Add(this.button17);
+            this.gbChild.Controls.Add(this.button12);
+            this.gbChild.Controls.Add(this.button21);
+            this.gbChild.Controls.Add(this.textBox8);
+            this.gbChild.Controls.Add(this.button22);
+            this.gbChild.Location = new System.Drawing.Point(6, 296);
+            this.gbChild.Name = "gbChild";
+            this.gbChild.Size = new System.Drawing.Size(695, 180);
+            this.gbChild.TabIndex = 51;
+            this.gbChild.TabStop = false;
+            this.gbChild.Text = "Child";
+            // 
+            // tbParentHandle
+            // 
+            this.tbParentHandle.Location = new System.Drawing.Point(392, 29);
+            this.tbParentHandle.Name = "tbParentHandle";
+            this.tbParentHandle.ReadOnly = true;
+            this.tbParentHandle.Size = new System.Drawing.Size(100, 21);
+            this.tbParentHandle.TabIndex = 63;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(11, 29);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 12);
+            this.label13.TabIndex = 64;
+            this.label13.Text = "handle：";
+            // 
+            // tbDlgHandle
+            // 
+            this.tbDlgHandle.Location = new System.Drawing.Point(303, 62);
+            this.tbDlgHandle.Name = "tbDlgHandle";
+            this.tbDlgHandle.ReadOnly = true;
+            this.tbDlgHandle.Size = new System.Drawing.Size(100, 21);
+            this.tbDlgHandle.TabIndex = 65;
             // 
             // button41
             // 
@@ -944,7 +1000,7 @@ namespace Show
             // tabConfig
             // 
             this.tabConfig.Controls.Add(this.groupBox7);
-            this.tabConfig.Controls.Add(this.groupBox5);
+            this.tabConfig.Controls.Add(this.gbConfig);
             this.tabConfig.Location = new System.Drawing.Point(4, 22);
             this.tabConfig.Name = "tabConfig";
             this.tabConfig.Size = new System.Drawing.Size(707, 482);
@@ -983,22 +1039,22 @@ namespace Show
             this.btnSaveConfig.Text = "Save Config";
             this.btnSaveConfig.Click += new System.EventHandler(this.btnSaveConfig_Click);
             // 
-            // groupBox5
+            // gbConfig
             // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.gbConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Location = new System.Drawing.Point(6, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(505, 468);
-            this.groupBox5.TabIndex = 0;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Config";
+            this.gbConfig.Location = new System.Drawing.Point(6, 6);
+            this.gbConfig.Name = "gbConfig";
+            this.gbConfig.Size = new System.Drawing.Size(505, 468);
+            this.gbConfig.TabIndex = 0;
+            this.gbConfig.TabStop = false;
+            this.gbConfig.Text = "Config";
             // 
             // tabWindow
             // 
             this.tabWindow.Controls.Add(this.groupBox9);
-            this.tabWindow.Controls.Add(this.groupBox3);
+            this.tabWindow.Controls.Add(this.gbWindow);
             this.tabWindow.Location = new System.Drawing.Point(4, 22);
             this.tabWindow.Name = "tabWindow";
             this.tabWindow.Padding = new System.Windows.Forms.Padding(3);
@@ -1011,6 +1067,7 @@ namespace Show
             // 
             this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Controls.Add(this.button6);
             this.groupBox9.Controls.Add(this.button27);
             this.groupBox9.Controls.Add(this.button26);
             this.groupBox9.Controls.Add(this.button40);
@@ -1022,10 +1079,19 @@ namespace Show
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Operation";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(11, 418);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(160, 23);
+            this.button6.TabIndex = 71;
+            this.button6.Text = "Save Config";
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
             // tabBrowser
             // 
             this.tabBrowser.Controls.Add(this.groupBox8);
-            this.tabBrowser.Controls.Add(this.groupBox4);
+            this.tabBrowser.Controls.Add(this.gbBrowser);
             this.tabBrowser.Location = new System.Drawing.Point(4, 22);
             this.tabBrowser.Name = "tabBrowser";
             this.tabBrowser.Size = new System.Drawing.Size(707, 482);
@@ -1171,23 +1237,23 @@ namespace Show
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // groupBox4
+            // gbBrowser
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.gbBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.btnFindNode);
-            this.groupBox4.Controls.Add(this.tbFindNode);
-            this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.treeView1);
-            this.groupBox4.Controls.Add(this.tbFullPath);
-            this.groupBox4.Location = new System.Drawing.Point(6, 6);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(499, 469);
-            this.groupBox4.TabIndex = 51;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Browser";
+            this.gbBrowser.Controls.Add(this.label11);
+            this.gbBrowser.Controls.Add(this.btnFindNode);
+            this.gbBrowser.Controls.Add(this.tbFindNode);
+            this.gbBrowser.Controls.Add(this.label10);
+            this.gbBrowser.Controls.Add(this.treeView1);
+            this.gbBrowser.Controls.Add(this.tbFullPath);
+            this.gbBrowser.Location = new System.Drawing.Point(6, 6);
+            this.gbBrowser.Name = "gbBrowser";
+            this.gbBrowser.Size = new System.Drawing.Size(499, 469);
+            this.gbBrowser.TabIndex = 51;
+            this.gbBrowser.TabStop = false;
+            this.gbBrowser.Text = "Browser";
             // 
             // label11
             // 
@@ -1216,6 +1282,7 @@ namespace Show
             this.tbFindNode.Name = "tbFindNode";
             this.tbFindNode.Size = new System.Drawing.Size(242, 21);
             this.tbFindNode.TabIndex = 42;
+            this.tbFindNode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFindNode_KeyUp);
             // 
             // label10
             // 
@@ -1246,6 +1313,78 @@ namespace Show
             this.tbFullPath.Name = "tbFullPath";
             this.tbFullPath.Size = new System.Drawing.Size(422, 21);
             this.tbFullPath.TabIndex = 37;
+            // 
+            // tabInvoice
+            // 
+            this.tabInvoice.Controls.Add(this.groupBox2);
+            this.tabInvoice.Controls.Add(this.groupBox3);
+            this.tabInvoice.Location = new System.Drawing.Point(4, 22);
+            this.tabInvoice.Name = "tabInvoice";
+            this.tabInvoice.Size = new System.Drawing.Size(707, 482);
+            this.tabInvoice.TabIndex = 5;
+            this.tabInvoice.Text = "Invoice";
+            this.tabInvoice.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnPrintInvoice);
+            this.groupBox2.Controls.Add(this.button23);
+            this.groupBox2.Location = new System.Drawing.Point(518, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(182, 468);
+            this.groupBox2.TabIndex = 53;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Operation";
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(11, 43);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(160, 23);
+            this.button23.TabIndex = 54;
+            this.button23.Text = "Load Invoice";
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.tbInvoiceUrl);
+            this.groupBox3.Controls.Add(this.dataGridView1);
+            this.groupBox3.Location = new System.Drawing.Point(7, 7);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(505, 468);
+            this.groupBox3.TabIndex = 52;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Invoice";
+            // 
+            // tbInvoiceUrl
+            // 
+            this.tbInvoiceUrl.Location = new System.Drawing.Point(60, 20);
+            this.tbInvoiceUrl.Name = "tbInvoiceUrl";
+            this.tbInvoiceUrl.Size = new System.Drawing.Size(439, 21);
+            this.tbInvoiceUrl.TabIndex = 1;
+            this.tbInvoiceUrl.Text = "http://dev.hbdworld.com.cn/company_v2/invoice/getprint?shop_id=468";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 47);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(493, 415);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
             // 
             // tabTest2
             // 
@@ -1283,14 +1422,14 @@ namespace Show
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "示例";
             // 
-            // btnTo16
+            // btnTo10
             // 
-            this.btnTo16.Location = new System.Drawing.Point(264, 128);
-            this.btnTo16.Name = "btnTo16";
-            this.btnTo16.Size = new System.Drawing.Size(75, 23);
-            this.btnTo16.TabIndex = 5;
-            this.btnTo16.Text = ">> 16进制";
-            this.btnTo16.Click += new System.EventHandler(this.btnTo16_Click);
+            this.btnTo10.Location = new System.Drawing.Point(264, 157);
+            this.btnTo10.Name = "btnTo10";
+            this.btnTo10.Size = new System.Drawing.Size(75, 23);
+            this.btnTo10.TabIndex = 33;
+            this.btnTo10.Text = " 10进制<<";
+            this.btnTo10.Click += new System.EventHandler(this.btnTo10_Click);
             // 
             // button1
             // 
@@ -1300,6 +1439,31 @@ namespace Show
             this.button1.TabIndex = 0;
             this.button1.Text = "open";
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tbText16
+            // 
+            this.tbText16.Location = new System.Drawing.Point(360, 142);
+            this.tbText16.Name = "tbText16";
+            this.tbText16.Size = new System.Drawing.Size(100, 21);
+            this.tbText16.TabIndex = 32;
+            this.tbText16.Text = "textBox4";
+            // 
+            // btnTo16
+            // 
+            this.btnTo16.Location = new System.Drawing.Point(264, 128);
+            this.btnTo16.Name = "btnTo16";
+            this.btnTo16.Size = new System.Drawing.Size(75, 23);
+            this.btnTo16.TabIndex = 5;
+            this.btnTo16.Text = ">> 16进制";
+            this.btnTo16.Click += new System.EventHandler(this.btnTo16_Click);
+            // 
+            // tbText10
+            // 
+            this.tbText10.Location = new System.Drawing.Point(145, 140);
+            this.tbText10.Name = "tbText10";
+            this.tbText10.Size = new System.Drawing.Size(100, 21);
+            this.tbText10.TabIndex = 11;
+            this.tbText10.Text = "textBox3";
             // 
             // button2
             // 
@@ -1379,55 +1543,29 @@ namespace Show
             this.textBox2.TabIndex = 10;
             this.textBox2.Text = "textBox2";
             // 
-            // label13
+            // timer1
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 29);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 12);
-            this.label13.TabIndex = 64;
-            this.label13.Text = "handle：";
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // tbParentHandle
+            // label14
             // 
-            this.tbParentHandle.Location = new System.Drawing.Point(392, 29);
-            this.tbParentHandle.Name = "tbParentHandle";
-            this.tbParentHandle.ReadOnly = true;
-            this.tbParentHandle.Size = new System.Drawing.Size(100, 21);
-            this.tbParentHandle.TabIndex = 63;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 23);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 12);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Url:";
             // 
-            // tbDlgHandle
+            // btnPrintInvoice
             // 
-            this.tbDlgHandle.Location = new System.Drawing.Point(303, 62);
-            this.tbDlgHandle.Name = "tbDlgHandle";
-            this.tbDlgHandle.ReadOnly = true;
-            this.tbDlgHandle.Size = new System.Drawing.Size(100, 21);
-            this.tbDlgHandle.TabIndex = 65;
-            // 
-            // tbText10
-            // 
-            this.tbText10.Location = new System.Drawing.Point(145, 140);
-            this.tbText10.Name = "tbText10";
-            this.tbText10.Size = new System.Drawing.Size(100, 21);
-            this.tbText10.TabIndex = 11;
-            this.tbText10.Text = "textBox3";
-            // 
-            // tbText16
-            // 
-            this.tbText16.Location = new System.Drawing.Point(360, 142);
-            this.tbText16.Name = "tbText16";
-            this.tbText16.Size = new System.Drawing.Size(100, 21);
-            this.tbText16.TabIndex = 32;
-            this.tbText16.Text = "textBox4";
-            // 
-            // btnTo10
-            // 
-            this.btnTo10.Location = new System.Drawing.Point(264, 157);
-            this.btnTo10.Name = "btnTo10";
-            this.btnTo10.Size = new System.Drawing.Size(75, 23);
-            this.btnTo10.TabIndex = 33;
-            this.btnTo10.Text = " 10进制<<";
-            this.btnTo10.Click += new System.EventHandler(this.btnTo10_Click);
+            this.btnPrintInvoice.Location = new System.Drawing.Point(11, 72);
+            this.btnPrintInvoice.Name = "btnPrintInvoice";
+            this.btnPrintInvoice.Size = new System.Drawing.Size(160, 23);
+            this.btnPrintInvoice.TabIndex = 55;
+            this.btnPrintInvoice.Text = "Print Invoice";
+            this.btnPrintInvoice.Click += new System.EventHandler(this.btnPrintInvoice_Click);
             // 
             // Form1
             // 
@@ -1437,14 +1575,14 @@ namespace Show
             this.Name = "Form1";
             this.Text = "HandleTools";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.gbMain.ResumeLayout(false);
+            this.gbMain.PerformLayout();
+            this.gbWindow.ResumeLayout(false);
+            this.gbWindow.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.gbChild.ResumeLayout(false);
+            this.gbChild.PerformLayout();
             this.tabConfig.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.tabWindow.ResumeLayout(false);
@@ -1452,8 +1590,13 @@ namespace Show
             this.tabBrowser.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.gbBrowser.ResumeLayout(false);
+            this.gbBrowser.PerformLayout();
+            this.tabInvoice.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabTest2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1476,12 +1619,14 @@ namespace Show
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
-            tbWindowName.Text = "TeamViewer";
-            LoadConfig(groupBox2, "main");
-            LoadConfig(groupBox6, "child");
+            //tbWindowName.Text = "TeamViewer";
+            
+            LoadConfig(gbMain, "main");
+            LoadConfig(gbChild, "child");
+            SaveConfig(gbWindow, "window");
 
-            LoadControls();
-            LoadConfig();
+            LoadConfigControls();
+            LoadConfigConfig();
         }
 
         private void button1_Click(object sender, System.EventArgs e)
@@ -1821,7 +1966,7 @@ namespace Show
             for (int i = 0; i < list.Count; i++)
             {
                 HandleInfo hinfo = (HandleInfo)list[i];
-                Control[] cs = groupBox3.Controls.Find("tbNoRelation_" + i, true);
+                Control[] cs = gbWindow.Controls.Find("tbNoRelation_" + i, true);
                 string relation = ((TextBox)cs[0]).Text;
                 if (relation.Equals("click"))
                 {
@@ -2013,9 +2158,9 @@ namespace Show
             return node;
         }
 
-        private void LoadControls()
+        private void LoadConfigControls()
         {
-            GroupBox gb = groupBox5;
+            GroupBox gb = gbConfig;
             gb.Controls.Clear();
 
             list = new ArrayList();
@@ -2095,9 +2240,9 @@ namespace Show
 
         private void button32_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < groupBox5.Controls.Count; i++)
+            for (int i = 0; i < gbConfig.Controls.Count; i++)
             {
-                Panel panel = (Panel)groupBox5.Controls[i];
+                Panel panel = (Panel)gbConfig.Controls[i];
                 //tbNoFullIndex_
                 Control[] cs = panel.Controls.Find("tbNoFullIndex_" + i, true);
                 string fullIndex = ((TextBox)cs[0]).Text;
@@ -2155,9 +2300,9 @@ namespace Show
             }
             invoice.RemoveAll();
 
-            for (int i = 0; i < groupBox5.Controls.Count; i++)
+            for (int i = 0; i < gbConfig.Controls.Count; i++)
             {
-                Panel panel = (Panel)groupBox5.Controls[i];
+                Panel panel = (Panel)gbConfig.Controls[i];
                 //tbNoFullIndex_
                 Control[] cs = panel.Controls.Find("tbNoFullIndex_" + i, true);
                 string fullIndex = ((TextBox)cs[0]).Text;
@@ -2199,10 +2344,10 @@ namespace Show
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
         {
-            LoadConfig();
+            LoadConfigConfig();
         }
 
-        private void LoadConfig()
+        private void LoadConfigConfig()
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load("config.xml");
@@ -2212,10 +2357,10 @@ namespace Show
                 return;
             }
 
-            for (int i = 0; i < groupBox5.Controls.Count; i++)
+            for (int i = 0; i < gbConfig.Controls.Count; i++)
             {
                 XmlElement elem = (XmlElement)invoice.SelectSingleNode("elem[@no='" + i.ToString() + "']");
-                Panel panel = (Panel)groupBox5.Controls[i];
+                Panel panel = (Panel)gbConfig.Controls[i];
                 if (elem == null)
                 {
                     continue;
@@ -2248,9 +2393,9 @@ namespace Show
 
         private void button34_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < groupBox5.Controls.Count; i++)
+            for (int i = 0; i < gbConfig.Controls.Count; i++)
             {
-                Panel panel = (Panel)groupBox5.Controls[i];
+                Panel panel = (Panel)gbConfig.Controls[i];
                 //tbNoFullIndex_
                 Control[] cs = panel.Controls.Find("tbNoFullIndex_" + i, true);
                 string fullIndex = ((TextBox)cs[0]).Text;
@@ -2326,7 +2471,7 @@ namespace Show
                 return;
             }
 
-            SaveConfig(groupBox2, "main");
+            SaveConfig(gbMain, "main");
         }
 
         private static void SaveConfig(Control gb, string configNode)
@@ -2385,7 +2530,7 @@ namespace Show
 
         private void button38_Click(object sender, EventArgs e)
         {
-            LoadConfig(groupBox2, "main");
+            LoadConfig(gbMain, "main");
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -2401,7 +2546,7 @@ namespace Show
                 return;
             }
 
-            SaveConfig(groupBox6, "child");
+            SaveConfig(gbChild, "child");
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -2428,13 +2573,9 @@ namespace Show
 
         private void btnFindNode_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbFindNode.Text))
+            CreateTreeView(myhwnd, tlist);
+            if (!string.IsNullOrEmpty(tbFindNode.Text))
             {
-                CreateTreeView(myhwnd, tlist);
-            }
-            else 
-            {
-                CreateTreeView(myhwnd, tlist);
                 List<TreeNode> otree = new List<TreeNode>();
                 TreeNodeCollection cs = treeView1.Nodes;
                 foreach (TreeNode node in cs)
@@ -2452,6 +2593,7 @@ namespace Show
                         treeView1.Nodes.Add(node);
                     }
                 }
+                treeView1.ExpandAll();
             }
            
         }
@@ -2497,6 +2639,122 @@ namespace Show
             catch (Exception ex)
             {
             }
+        }
+
+        private void tbFindNode_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Control || e.KeyCode == Keys.Enter)
+            {
+                btnFindNode_Click(sender,e);
+            }
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
+            DialogResult dr = MessageBox.Show("确定要保存吗?", "操作", messButton);
+            if (dr == DialogResult.OK)//如果点击“确定”按钮
+            {
+                SaveConfig(gbWindow, "window");
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+ 
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(tbInvoiceUrl.Text);
+            req.Method = "GET";
+            using (WebResponse wr = req.GetResponse())
+            {
+                //在这里对接收到的页面内容进行处理
+                string html = new StreamReader(wr.GetResponseStream(), Encoding.GetEncoding("gb2312")).ReadToEnd();
+                Console.WriteLine(html);
+                wr.Close();
+
+                JObject json1 = (JObject)JsonConvert.DeserializeObject(html);
+                string code  = (string)json1["code"];
+                JArray data = (JArray)json1["data"];
+                string message = (string)json1["message"];
+                DataRow dr = null;
+                foreach (JObject item in data)
+                {
+                    //column
+                    if (dt.Columns.Count==0)
+                    {
+                        foreach (JProperty p in item.Properties())
+                        {
+                            dt.Columns.Add(p.Name);
+                        }
+                    }
+
+                    //add row
+                    dr = dt.NewRow();
+                    foreach (JProperty p in item.Properties())
+                    {
+                        dr[p.Name] = p.Value;
+                    }
+                    dt.Rows.Add(dr);
+
+                    //string id = (string)item.Property("id");
+                }
+
+                dataGridView1.DataSource = dt;
+            }
+           
+        }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrintInvoice_Click(object sender, EventArgs e)
+        {
+             DataGridViewRow row =  dataGridView1.SelectedRows[0];
+             DataGridViewCellCollection cells = row.Cells;
+
+             //Hashtable ht = new Hashtable();
+             //ht["title_name"] = cells["title_name"];//"红板凳科技股份有限公司";
+             //ht["title_type"] = cells["title_type"];// "CORPORATION";
+             //ht["user_mobile"] = cells["user_mobile"];//"010 - 88096629";
+             //ht["user_address"] = cells["user_address"];//"北京市海淀区知春路49号七层";
+             //ht["tax_register_no"] = cells["tax_register_no"];//"91110108067282874H";
+             //ht["open_bank_name"] = cells["open_bank_name"];//"交通银行北京慧忠里支行";
+             //ht["open_bank_account"] = cells["open_bank_account"];//"110061538018010080784";
+
+             for (int i = 0; i < gbConfig.Controls.Count; i++)
+             {
+                 Panel panel = (Panel)gbConfig.Controls[i];
+                 //tbNoFullIndex_
+                 Control[] cs = panel.Controls.Find("tbNoFullIndex_" + i, true);
+                 string fullIndex = ((TextBox)cs[0]).Text;
+                 if (string.IsNullOrEmpty(fullIndex))
+                 {
+                     continue;
+                 }
+                 TreeNode node = getNodeByFullIndex(fullIndex);
+                 HandleInfo hinfo = (HandleInfo)node.Tag;
+
+                 //tbNoValue_
+                 Control[] cs2 = panel.Controls.Find("tbNoLabel_" + i, true);
+                 string label = ((TextBox)cs2[0]).Text;
+
+                 if (cells == null || cells[label] == null)
+                 {
+                     continue;
+                 }
+
+                 SendMessage(hinfo.Handle, WM_SETTEXT, 0, cells[label].Value.ToString());
+             }
+             showResult1(1, ((Button)sender).Text);
+
+
         }
 
       

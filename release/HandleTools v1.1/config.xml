@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <invoice>
+    <elem no="0" fullIndex="15" label="title_name">红板凳科技股份有限公司</elem>
+    <elem no="1" fullIndex="14" label="title_type">CORPORATION</elem>
+    <elem no="2" fullIndex="5" label="user_mobile">010 - 88096629</elem>
+    <elem no="3" fullIndex="9" label="user_address">北京市海淀区知春路49号七层</elem>
+    <elem no="4" fullIndex="8" label="tax_register_no">91110108067282874H</elem>
+    <elem no="5" fullIndex="2" label="open_bank_name">交通银行北京慧忠里支行</elem>
+    <elem no="6" fullIndex="0" label="open_bank_account">110061538018010080784</elem>
+  </invoice>
+  <main>
+    <elem name="tbChildName" text="kp" />
+    <elem name="tbWindowHandle" text="67320" />
+    <elem name="tbButtonNo" text="7" />
+    <elem name="tbWindowName" text="Form1" />
+    <elem name="tbWindowClass" text="" />
+    <elem name="tbWindowText" text="hello" />
+  </main>
+  <child>
+    <elem name="tbParentHandle" text="" />
+    <elem name="tbDlgHandle" text="" />
+    <elem name="tbSetHandle" text="" />
+    <elem name="textBox6" text="world" />
+    <elem name="tbDlgId" text="" />
+    <elem name="textBox8" text="" />
+  </child>
+  <window>
+    <elem name="tbInclude" text="" />
+    <elem name="tbExclude" text="tooltips_class32,IME" />
+  </window>
+</root>

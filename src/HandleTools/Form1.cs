@@ -1669,7 +1669,7 @@ namespace Show
             
             LoadConfig(gbMain, "main");
             LoadConfig(gbChild, "child");
-            SaveConfig(gbWindow, "window");
+            LoadConfig(gbWindow, "window");
 
             LoadConfigControls();
             LoadConfigConfig();

@@ -32,7 +32,7 @@ namespace Show
         );
 
         ArrayList toplist = null;
-        public ArrayList getAllTopWindows(int y=0)
+        public ArrayList getEnumWindows(int y=0)
         {
             toplist = new ArrayList();
             CallBack myCallBack = new CallBack(TopReport);
@@ -130,7 +130,7 @@ namespace Show
         [DllImport("user32.dll", EntryPoint = "FindWindowEx")]
         private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
 
-        public ArrayList getChildrenWindows(IntPtr ParentHandle)
+        public ArrayList getEnumWindows2(IntPtr ParentHandle)
         {
             Win32Service ws = new Win32Service();
             ArrayList list = new ArrayList();

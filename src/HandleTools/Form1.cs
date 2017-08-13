@@ -129,6 +129,9 @@ namespace Show
         private Button btnFindNode;
         private TextBox tbFindNode;
         private Label label11;
+        private CheckBox cbMultiLevel;
+        private TextBox tbInclude;
+        private Label label12;
         public IntPtr myControl;
         #endregion
 
@@ -278,6 +281,7 @@ namespace Show
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbMultiLevel = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbExclude = new System.Windows.Forms.TextBox();
             this.button40 = new System.Windows.Forms.Button();
@@ -355,6 +359,8 @@ namespace Show
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbInclude = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -489,7 +495,6 @@ namespace Show
             this.tbWindowClass.Name = "tbWindowClass";
             this.tbWindowClass.Size = new System.Drawing.Size(99, 21);
             this.tbWindowClass.TabIndex = 24;
-            this.tbWindowClass.Text = "null";
             // 
             // label3
             // 
@@ -532,6 +537,9 @@ namespace Show
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.tbInclude);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.cbMultiLevel);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.tbExclude);
             this.groupBox2.Controls.Add(this.button40);
@@ -568,6 +576,16 @@ namespace Show
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Main";
             // 
+            // cbMultiLevel
+            // 
+            this.cbMultiLevel.AutoSize = true;
+            this.cbMultiLevel.Location = new System.Drawing.Point(559, 63);
+            this.cbMultiLevel.Name = "cbMultiLevel";
+            this.cbMultiLevel.Size = new System.Drawing.Size(72, 16);
+            this.cbMultiLevel.TabIndex = 66;
+            this.cbMultiLevel.Text = "children";
+            this.cbMultiLevel.UseVisualStyleBackColor = true;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -581,17 +599,17 @@ namespace Show
             // 
             this.tbExclude.Location = new System.Drawing.Point(136, 25);
             this.tbExclude.Name = "tbExclude";
-            this.tbExclude.Size = new System.Drawing.Size(290, 21);
+            this.tbExclude.Size = new System.Drawing.Size(112, 21);
             this.tbExclude.TabIndex = 64;
             this.tbExclude.Text = "tooltips_class32,IME";
             // 
             // button40
             // 
-            this.button40.Location = new System.Drawing.Point(558, 24);
+            this.button40.Location = new System.Drawing.Point(432, 25);
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(120, 23);
             this.button40.TabIndex = 63;
-            this.button40.Text = "EnumWindows2";
+            this.button40.Text = "EnumWindows";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -735,11 +753,11 @@ namespace Show
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(432, 24);
+            this.button20.Location = new System.Drawing.Point(559, 25);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(120, 23);
             this.button20.TabIndex = 31;
-            this.button20.Text = "EnumWindows";
+            this.button20.Text = "EnumWindows2";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -1350,6 +1368,23 @@ namespace Show
             this.textBox2.TabIndex = 10;
             this.textBox2.Text = "textBox2";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(274, 30);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(59, 12);
+            this.label12.TabIndex = 67;
+            this.label12.Text = "Include：";
+            // 
+            // tbInclude
+            // 
+            this.tbInclude.Location = new System.Drawing.Point(327, 25);
+            this.tbInclude.Name = "tbInclude";
+            this.tbInclude.Size = new System.Drawing.Size(99, 21);
+            this.tbInclude.TabIndex = 68;
+            this.tbInclude.Text = "TeamViewer";
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
@@ -1566,30 +1601,37 @@ namespace Show
         private ArrayList tlist = new ArrayList();
         private void button20_Click(object sender, EventArgs e)
         {
-            ArrayList plist = GetTreeViewData();
+            Win32Service ws = new Win32Service();
+            InitExclude(ws);
+
+            ArrayList plist = GetTreeViewData(ws);
             tlist = plist;
             CreateTreeView(IntPtr.Zero, plist);
             showResult1(1, ((Button)sender).Text);
         }
 
-        private ArrayList GetTreeViewData()
+        private ArrayList GetTreeViewData(Win32Service ws)
         {
-            Win32Service ws = new Win32Service();
-            ws.exlude.Clear();
-            if (!string.IsNullOrEmpty(tbExclude.Text))
-            {
-                string[] xs = tbExclude.Text.Split(',');
-                ws.exlude.AddRange(xs);
-            }
-
+            //Win32Service ws = new Win32Service();
             ArrayList plist = ws.getAllTopWindows();
             for (int i = 0; i < plist.Count; i++)
             {
                 HandleInfo hinfo = (HandleInfo)plist[i];
-                if (hinfo.Handle == new IntPtr(1592676))
+                if (cbMultiLevel.Checked)
                 {
-                    //ArrayList clist = ws.getAllChildrenWindows(hinfo.Handle);
-                    //plist.AddRange(clist);
+                    if (ws.include.Count > 0)
+                    {
+                        if (ws.include.Exists(item => hinfo.Text.Contains(item)))
+                        {
+                            ArrayList clist = ws.getEnumChildWindows(hinfo.Handle);
+                            plist.AddRange(clist);
+                        }
+                    }
+                    else
+                    {
+                        ArrayList clist = ws.getEnumChildWindows(hinfo.Handle);
+                        plist.AddRange(clist);
+                    }
                 }
             }
 
@@ -1601,6 +1643,25 @@ namespace Show
                 Console.WriteLine(HandleInfo.getNodeShow(hinfo));
             }
             return plist;
+        }
+
+        private void InitExclude(Win32Service ws)
+        {
+            //exclude
+            ws.exclude.Clear();
+            if (!string.IsNullOrEmpty(tbExclude.Text))
+            {
+                string[] xs = tbExclude.Text.Split(',');
+                ws.exclude.AddRange(xs);
+            }
+
+            //include
+            ws.include.Clear();
+            if (!string.IsNullOrEmpty(tbInclude.Text))
+            {
+                string[] xs = tbInclude.Text.Split(',');
+                ws.include.AddRange(xs);
+            }
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1912,7 +1973,7 @@ namespace Show
         private void button30_Click(object sender, EventArgs e)
         {
             Win32Service service = new Win32Service();
-            ArrayList data = service.getAllChildrenWindows(myhwnd);
+            ArrayList data = service.getEnumChildWindows(myhwnd);
 
             //return;
             CreateTreeView(myhwnd, data);
@@ -2446,8 +2507,10 @@ namespace Show
         {
             //IntPtr ParentHandle = FindWindow(null, "无标题 - 记事本");
             Win32Service ws = new Win32Service();
-            ArrayList list = ws.getChildrenWindows(IntPtr.Zero);
-            CreateTreeView(IntPtr.Zero, list);
+            InitExclude(ws);
+            ArrayList plist = ws.getChildrenWindows(IntPtr.Zero);
+            tlist = plist;
+            CreateTreeView(IntPtr.Zero, plist);
 
             showResult1(list.Count, ((Button)sender).Text);
         }

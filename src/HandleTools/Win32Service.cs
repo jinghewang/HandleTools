@@ -40,7 +40,7 @@ namespace Show
             return toplist;
         }
 
-        public ArrayList getAllChildrenWindows(IntPtr myhwnd)
+        public ArrayList getEnumChildWindows(IntPtr myhwnd)
         {
             list = new ArrayList();
             ChildCallBack myCallBack = new ChildCallBack(ChildReport);
@@ -78,7 +78,7 @@ namespace Show
             IntPtr lpString2 = Marshal.AllocHGlobal(200);
             GetClassName(hwnd, lpString2, 200);
             var className = Marshal.PtrToStringAnsi(lpString2);
-            if (exlude.Count>0 && exlude.Contains(className))
+            if (exclude.Count > 0 && exclude.Contains(className))
                 return true;
 
             IntPtr lpString = Marshal.AllocHGlobal(200);
@@ -96,7 +96,11 @@ namespace Show
             return true;
         }
 
-        public List<String> exlude = new List<string>(); 
+        public List<String> exclude = new List<string>();
+
+        public List<String> include = new List<string>();
+
+        public bool children = false;
 
         public bool ChildReport(int hwnd, int lParam)//static
         {
@@ -105,7 +109,7 @@ namespace Show
             IntPtr lpString2 = Marshal.AllocHGlobal(200);
             GetClassName(hwnd, lpString2, 200);
             var className = Marshal.PtrToStringAnsi(lpString2);
-            if (exlude.Count>0 && exlude.Contains(className))
+            if (exclude.Count > 0 && exclude.Contains(className))
                 return true;
 
             IntPtr lpString = Marshal.AllocHGlobal(200);
@@ -128,6 +132,7 @@ namespace Show
 
         public ArrayList getChildrenWindows(IntPtr ParentHandle)
         {
+            Win32Service ws = new Win32Service();
             ArrayList list = new ArrayList();
             IntPtr ChildHandle = IntPtr.Zero;
             ChildHandle = FindWindowEx(ParentHandle, ChildHandle, null, null);
@@ -135,13 +140,21 @@ namespace Show
             int i = 0;
             while (ChildHandle.ToInt32() > 0)
             {
+                IntPtr lpString2 = Marshal.AllocHGlobal(200);
+                GetClassName(ChildHandle.ToInt32(), lpString2, 200);
+                var className = Marshal.PtrToStringAnsi(lpString2);
+                if (exclude.Count > 0 && exclude.Contains(className)) {
+                    ChildHandle = FindWindowEx(ParentHandle, ChildHandle, null, null);
+                    continue;
+                }
+
                 IntPtr lpString = Marshal.AllocHGlobal(200);
                 GetWindowText(ChildHandle.ToInt32(), lpString, 200);
                 var text = Marshal.PtrToStringAnsi(lpString);
 
-                IntPtr lpString2 = Marshal.AllocHGlobal(200);
-                GetClassName(ChildHandle.ToInt32(), lpString2, 200);
-                var className = Marshal.PtrToStringAnsi(lpString2);
+                if (ws.children && (ws.include.Count > 0 && ws.include.Exists(item => text.Contains(item))))
+                { 
+                }
 
                 HandleInfo hinfo = new HandleInfo(ChildHandle, text);
                 hinfo.ClassName = className;

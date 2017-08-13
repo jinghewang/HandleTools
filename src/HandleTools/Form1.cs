@@ -99,7 +99,6 @@ namespace Show
         private Label label10;
         private TabPage tabConfig;
         private GroupBox groupBox5;
-        private Button button31;
         private Button button32;
         private Panel panel1;
         private Button btnLoadConfig;
@@ -281,6 +280,8 @@ namespace Show
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbInclude = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.cbMultiLevel = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbExclude = new System.Windows.Forms.TextBox();
@@ -288,7 +289,6 @@ namespace Show
             this.button38 = new System.Windows.Forms.Button();
             this.button37 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.button25 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
@@ -359,8 +359,6 @@ namespace Show
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbInclude = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -546,7 +544,6 @@ namespace Show
             this.groupBox2.Controls.Add(this.button38);
             this.groupBox2.Controls.Add(this.button37);
             this.groupBox2.Controls.Add(this.button34);
-            this.groupBox2.Controls.Add(this.button31);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.button25);
             this.groupBox2.Controls.Add(this.button32);
@@ -575,6 +572,23 @@ namespace Show
             this.groupBox2.TabIndex = 32;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Main";
+            // 
+            // tbInclude
+            // 
+            this.tbInclude.Location = new System.Drawing.Point(327, 25);
+            this.tbInclude.Name = "tbInclude";
+            this.tbInclude.Size = new System.Drawing.Size(99, 21);
+            this.tbInclude.TabIndex = 68;
+            this.tbInclude.Text = "TeamViewer";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(274, 30);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(59, 12);
+            this.label12.TabIndex = 67;
+            this.label12.Text = "Include：";
             // 
             // cbMultiLevel
             // 
@@ -634,23 +648,12 @@ namespace Show
             // 
             // button34
             // 
-            this.button34.Location = new System.Drawing.Point(528, 167);
+            this.button34.Location = new System.Drawing.Point(402, 167);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(120, 23);
             this.button34.TabIndex = 56;
             this.button34.Text = "Clear Data";
             this.button34.Click += new System.EventHandler(this.button34_Click);
-            // 
-            // button31
-            // 
-            this.button31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button31.Location = new System.Drawing.Point(276, 167);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(120, 23);
-            this.button31.TabIndex = 36;
-            this.button31.Text = "EnumChildWindows";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
             // label9
             // 
@@ -674,7 +677,7 @@ namespace Show
             // button32
             // 
             this.button32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button32.Location = new System.Drawing.Point(402, 167);
+            this.button32.Location = new System.Drawing.Point(276, 167);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(120, 23);
             this.button32.TabIndex = 52;
@@ -1368,23 +1371,6 @@ namespace Show
             this.textBox2.TabIndex = 10;
             this.textBox2.Text = "textBox2";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(274, 30);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(59, 12);
-            this.label12.TabIndex = 67;
-            this.label12.Text = "Include：";
-            // 
-            // tbInclude
-            // 
-            this.tbInclude.Location = new System.Drawing.Point(327, 25);
-            this.tbInclude.Name = "tbInclude";
-            this.tbInclude.Size = new System.Drawing.Size(99, 21);
-            this.tbInclude.TabIndex = 68;
-            this.tbInclude.Text = "TeamViewer";
-            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
@@ -1435,8 +1421,8 @@ namespace Show
             LoadConfig(groupBox2, "main");
             LoadConfig(groupBox6, "child");
 
-            button31_Click(sender, e);
-            btnLoadConfig_Click(sender, e);
+            LoadControls();
+            LoadConfig();
         }
 
         private void button1_Click(object sender, System.EventArgs e)
@@ -1532,9 +1518,6 @@ namespace Show
             SendMessage(myControl, WM_SETTEXT, 0, textBox6.Text);
             showResult2(myControl.ToInt32(), ((Button)sender).Text);
         }
-
-
-
 
         private void button16_Click(object sender, System.EventArgs e)
         {
@@ -1840,17 +1823,7 @@ namespace Show
 
         private void button26_Click(object sender, EventArgs e)
         {
-
-            Hashtable ht = new Hashtable();
-
-            ht["title_name"] = "红板凳科技股份有限公司";
-            ht["title_type"] = "CORPORATION";
-            ht["user_mobile"] = "010 - 88096629";
-            ht["user_address"] = "北京市海淀区知春路49号七层";
-            ht["tax_register_no"] = "91110108067282874H";
-            ht["open_bank_name"] = "交通银行北京慧忠里支行";
-            ht["open_bank_account"] = "110061538018010080784";
-
+            Hashtable ht = getCompanyInfo();
             for (int i = 0; i < list.Count; i++)
             {
                 HandleInfo hinfo = (HandleInfo)list[i];
@@ -2117,7 +2090,7 @@ namespace Show
             return node;
         }
 
-        private void button31_Click(object sender, EventArgs e)
+        private void LoadControls()
         {
             GroupBox gb = groupBox5;
             gb.Controls.Clear();
@@ -2195,24 +2168,10 @@ namespace Show
 
                 gb.Controls.Add(panel);
             }
-
-            showResult1(1, "加载配置");
-
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
-
-            Hashtable ht = new Hashtable();
-
-            ht["title_name"] = "红板凳科技股份有限公司";
-            ht["title_type"] = "CORPORATION";
-            ht["user_mobile"] = "010 - 88096629";
-            ht["user_address"] = "北京市海淀区知春路49号七层";
-            ht["tax_register_no"] = "91110108067282874H";
-            ht["open_bank_name"] = "交通银行北京慧忠里支行";
-            ht["open_bank_account"] = "110061538018010080784";
-
             for (int i = 0; i < groupBox5.Controls.Count; i++)
             {
                 Panel panel = (Panel)groupBox5.Controls[i];
@@ -2232,7 +2191,21 @@ namespace Show
 
                 SendMessage(hinfo.Handle, WM_SETTEXT, 0, text);
             }
-            showResult1(myhwnd.ToInt32(), ((Button)sender).Text);
+            showResult1(1, ((Button)sender).Text);
+        }
+
+        private static Hashtable getCompanyInfo()
+        {
+            Hashtable ht = new Hashtable();
+
+            ht["title_name"] = "红板凳科技股份有限公司";
+            ht["title_type"] = "CORPORATION";
+            ht["user_mobile"] = "010 - 88096629";
+            ht["user_address"] = "北京市海淀区知春路49号七层";
+            ht["tax_register_no"] = "91110108067282874H";
+            ht["open_bank_name"] = "交通银行北京慧忠里支行";
+            ht["open_bank_account"] = "110061538018010080784";
+            return ht;
         }
 
         private void btnSaveConfig_Click(object sender, EventArgs e)
@@ -2302,6 +2275,11 @@ namespace Show
         }
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
+        {
+            LoadConfig();
+        }
+
+        private void LoadConfig()
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load("config.xml");
@@ -2456,11 +2434,6 @@ namespace Show
             xmlDoc.Save("config.xml");
         }
 
-        private void button38_Click(object sender, EventArgs e)
-        {
-            LoadConfig(groupBox2, "main");
-        }
-
         private static void LoadConfig(Control gb, string configNode)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -2485,6 +2458,11 @@ namespace Show
                     con.Text = elem.GetAttribute("text");
                 }
             }
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            LoadConfig(groupBox2, "main");
         }
 
         private void button39_Click(object sender, EventArgs e)

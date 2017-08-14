@@ -84,7 +84,7 @@ namespace Show
         private TextBox tbFullPath;
         private TextBox tbSelectedNode;
         private Button btnGetNodeByPath;
-        private TabPage tabTest2;
+        private TabPage tabTool;
         private GroupBox groupBox1;
         private Button btnTo16;
         private Button button1;
@@ -154,6 +154,7 @@ namespace Show
         private Label label17;
         private Label label16;
         private Label label15;
+        private GroupBox groupBox4;
         public IntPtr myControl;
         #endregion
 
@@ -353,6 +354,9 @@ namespace Show
             this.button6 = new System.Windows.Forms.Button();
             this.tabBrowser = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.button36 = new System.Windows.Forms.Button();
             this.labResult3 = new System.Windows.Forms.Label();
             this.btnGetNodeByPath = new System.Windows.Forms.Button();
@@ -374,11 +378,14 @@ namespace Show
             this.tbFullPath = new System.Windows.Forms.TextBox();
             this.tabInvoice = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button31 = new System.Windows.Forms.Button();
+            this.btnPrintInvoice = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.tbInvoiceUrl = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabTest2 = new System.Windows.Forms.TabPage();
+            this.tabTool = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnTo10 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -395,12 +402,7 @@ namespace Show
             this.button9 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnPrintInvoice = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.gbMain.SuspendLayout();
             this.gbWindow.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -417,8 +419,9 @@ namespace Show
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tabTest2.SuspendLayout();
+            this.tabTool.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button10
@@ -897,7 +900,7 @@ namespace Show
             this.tabControl1.Controls.Add(this.tabWindow);
             this.tabControl1.Controls.Add(this.tabBrowser);
             this.tabControl1.Controls.Add(this.tabInvoice);
-            this.tabControl1.Controls.Add(this.tabTest2);
+            this.tabControl1.Controls.Add(this.tabTool);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -1125,6 +1128,36 @@ namespace Show
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Operation";
             // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(18, 182);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 12);
+            this.label17.TabIndex = 69;
+            this.label17.Text = "node：";
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(12, 124);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(41, 12);
+            this.label16.TabIndex = 68;
+            this.label16.Text = "path：";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 53);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 12);
+            this.label15.TabIndex = 67;
+            this.label15.Text = "handle：";
+            // 
             // button36
             // 
             this.button36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1343,6 +1376,24 @@ namespace Show
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Operation";
             // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(11, 101);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(160, 23);
+            this.button31.TabIndex = 56;
+            this.button31.Text = "Set Print Result";
+            this.button31.Visible = false;
+            // 
+            // btnPrintInvoice
+            // 
+            this.btnPrintInvoice.Location = new System.Drawing.Point(11, 72);
+            this.btnPrintInvoice.Name = "btnPrintInvoice";
+            this.btnPrintInvoice.Size = new System.Drawing.Size(160, 23);
+            this.btnPrintInvoice.TabIndex = 55;
+            this.btnPrintInvoice.Text = "Print Invoice";
+            this.btnPrintInvoice.Click += new System.EventHandler(this.btnPrintInvoice_Click);
+            // 
             // button23
             // 
             this.button23.Location = new System.Drawing.Point(11, 43);
@@ -1366,6 +1417,15 @@ namespace Show
             this.groupBox3.TabIndex = 52;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Invoice";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 23);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 12);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Url:";
             // 
             // tbInvoiceUrl
             // 
@@ -1391,25 +1451,22 @@ namespace Show
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
             // 
-            // tabTest2
+            // tabTool
             // 
-            this.tabTest2.Controls.Add(this.groupBox1);
-            this.tabTest2.Location = new System.Drawing.Point(4, 22);
-            this.tabTest2.Name = "tabTest2";
-            this.tabTest2.Size = new System.Drawing.Size(712, 488);
-            this.tabTest2.TabIndex = 3;
-            this.tabTest2.Text = "Test2";
-            this.tabTest2.UseVisualStyleBackColor = true;
+            this.tabTool.Controls.Add(this.groupBox4);
+            this.tabTool.Controls.Add(this.groupBox1);
+            this.tabTool.Location = new System.Drawing.Point(4, 22);
+            this.tabTool.Name = "tabTool";
+            this.tabTool.Size = new System.Drawing.Size(712, 488);
+            this.tabTool.TabIndex = 3;
+            this.tabTool.Text = "Tool";
+            this.tabTool.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnTo10);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.tbText16);
-            this.groupBox1.Controls.Add(this.btnTo16);
-            this.groupBox1.Controls.Add(this.tbText10);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button4);
@@ -1420,20 +1477,20 @@ namespace Show
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Location = new System.Drawing.Point(6, 117);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(698, 203);
+            this.groupBox1.Size = new System.Drawing.Size(698, 121);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "示例";
+            this.groupBox1.Text = "Demo";
             // 
             // btnTo10
             // 
-            this.btnTo10.Location = new System.Drawing.Point(264, 157);
+            this.btnTo10.Location = new System.Drawing.Point(166, 59);
             this.btnTo10.Name = "btnTo10";
             this.btnTo10.Size = new System.Drawing.Size(75, 23);
             this.btnTo10.TabIndex = 33;
-            this.btnTo10.Text = " 10进制<<";
+            this.btnTo10.Text = " << 10进制";
             this.btnTo10.Click += new System.EventHandler(this.btnTo10_Click);
             // 
             // button1
@@ -1447,28 +1504,27 @@ namespace Show
             // 
             // tbText16
             // 
-            this.tbText16.Location = new System.Drawing.Point(360, 142);
+            this.tbText16.Location = new System.Drawing.Point(264, 42);
             this.tbText16.Name = "tbText16";
             this.tbText16.Size = new System.Drawing.Size(100, 21);
             this.tbText16.TabIndex = 32;
-            this.tbText16.Text = "textBox4";
             // 
             // btnTo16
             // 
-            this.btnTo16.Location = new System.Drawing.Point(264, 128);
+            this.btnTo16.Location = new System.Drawing.Point(166, 30);
             this.btnTo16.Name = "btnTo16";
             this.btnTo16.Size = new System.Drawing.Size(75, 23);
             this.btnTo16.TabIndex = 5;
-            this.btnTo16.Text = ">> 16进制";
+            this.btnTo16.Text = "16进制 >>";
             this.btnTo16.Click += new System.EventHandler(this.btnTo16_Click);
             // 
             // tbText10
             // 
-            this.tbText10.Location = new System.Drawing.Point(145, 140);
+            this.tbText10.Location = new System.Drawing.Point(47, 42);
             this.tbText10.Name = "tbText10";
             this.tbText10.Size = new System.Drawing.Size(100, 21);
             this.tbText10.TabIndex = 11;
-            this.tbText10.Text = "textBox3";
+            this.tbText10.Text = "12";
             // 
             // button2
             // 
@@ -1554,62 +1610,18 @@ namespace Show
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label14
+            // groupBox4
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 23);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(29, 12);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Url:";
-            // 
-            // btnPrintInvoice
-            // 
-            this.btnPrintInvoice.Location = new System.Drawing.Point(11, 72);
-            this.btnPrintInvoice.Name = "btnPrintInvoice";
-            this.btnPrintInvoice.Size = new System.Drawing.Size(160, 23);
-            this.btnPrintInvoice.TabIndex = 55;
-            this.btnPrintInvoice.Text = "Print Invoice";
-            this.btnPrintInvoice.Click += new System.EventHandler(this.btnPrintInvoice_Click);
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(11, 101);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(160, 23);
-            this.button31.TabIndex = 56;
-            this.button31.Text = "Set Print Result";
-            this.button31.Visible = false;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 53);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(53, 12);
-            this.label15.TabIndex = 67;
-            this.label15.Text = "handle：";
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(12, 124);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 12);
-            this.label16.TabIndex = 68;
-            this.label16.Text = "path：";
-            // 
-            // label17
-            // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(18, 182);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 12);
-            this.label17.TabIndex = 69;
-            this.label17.Text = "node：";
+            this.groupBox4.Controls.Add(this.btnTo10);
+            this.groupBox4.Controls.Add(this.tbText16);
+            this.groupBox4.Controls.Add(this.tbText10);
+            this.groupBox4.Controls.Add(this.btnTo16);
+            this.groupBox4.Location = new System.Drawing.Point(6, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(696, 108);
+            this.groupBox4.TabIndex = 32;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Tool";
             // 
             // Form1
             // 
@@ -1643,9 +1655,11 @@ namespace Show
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tabTest2.ResumeLayout(false);
+            this.tabTool.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2661,7 +2675,8 @@ namespace Show
         {
             try {
                 tbText16.Text = "";
-                tbText16.Text = Convert.ToInt32(tbText10.Text).ToString("X8");
+                int i10 = Convert.ToInt32(tbText10.Text);
+                tbText16.Text = i10.ToString("X8");
             }
             catch(Exception ex){
             }
@@ -2673,8 +2688,8 @@ namespace Show
             try
             {
                 tbText10.Text = "";
-                //int i= Convert.ToString(tbText16.Text,);
-               // tbText10.Text = .ToString() ;
+                int i10 = Convert.ToInt32(tbText16.Text,16);
+                tbText10.Text = i10.ToString();
             }
             catch (Exception ex)
             {
